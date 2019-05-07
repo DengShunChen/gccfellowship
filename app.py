@@ -140,8 +140,8 @@ def handle_message(event):
 
       line_bot_api.reply_message(event.reply_token, carousel_template_message)
 
-    content = search(event.message.text)
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+#    content = search(event.message.text)
+#    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
 
 # 處理貼圖（隨機選擇貼圖回應）
 @handler.add(MessageEvent, message=StickerMessage)
