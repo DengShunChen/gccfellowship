@@ -111,7 +111,7 @@ def handle_message(event):
                           ),
                           URIAction(
                               label='氣象局官網',
-                              uri='https:www.cwb.gov.tw'
+                              uri='https://www.cwb.gov.tw/V8/C/index.html'
                           )
                       ]
                   ),
