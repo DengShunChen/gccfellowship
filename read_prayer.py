@@ -6,12 +6,15 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 date='2019/05/04'
+
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '1L-HZDaf9ZPKkXmDkdcOAOofCzCUfOydgssGiDgFuBuA'
 SAMPLE_RANGE_NAME = date+'感恩代禱事項!A:B'
+
+spreadsheet='https://docs.google.com/spreadsheets/d/%s' % (SAMPLE_SPREADSHEET_ID)
 
 def readprayer():
     """Shows basic usage of the Sheets API.
@@ -53,6 +56,7 @@ def readprayer():
             try:
               if r == 0:
               #  print('    %-4.4s: %s %s' % (row[0], row[1]),date)
+                strings = strings + spreadsheet + '\n'
                 strings = strings + '    %-4.4s: %s %s' % (row[0], date, row[1]) + '\n'
               else:
              #   print('%2.2d. %-4.4s: %s' % (r,row[0], row[1]))
