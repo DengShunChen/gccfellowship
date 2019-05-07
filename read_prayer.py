@@ -14,7 +14,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 SAMPLE_SPREADSHEET_ID = '1L-HZDaf9ZPKkXmDkdcOAOofCzCUfOydgssGiDgFuBuA'
 SAMPLE_RANGE_NAME = date+'感恩代禱事項!A:B'
 
-spreadsheet='https://docs.google.com/spreadsheets/d/%s' % (SAMPLE_SPREADSHEET_ID)
+spreadsheet='https://docs.google.com/spreadsheets/d/%s/edit#gid=1129601203' % (SAMPLE_SPREADSHEET_ID)
 
 def readprayer():
     """Shows basic usage of the Sheets API.
