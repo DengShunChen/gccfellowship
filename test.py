@@ -105,8 +105,8 @@ def index_2d(myList, v):
 def writeprayer(text):
     # input text
     textlist=text.strip().split(',')
-    name = textlist[1]
-    prayer = textlist[2]
+    name = textlist[0]
+    prayer = textlist[1]
     _values = [[name,prayer]]
 
     # create service for google spreadsheet

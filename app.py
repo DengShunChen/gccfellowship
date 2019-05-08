@@ -90,6 +90,19 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
 
+    if event.message.text == "團契成員檔案":
+      profile = line_bot_api.get_group_member_profile(group_id, user_id)
+
+      content = ''
+      content = content + profile.display_name + '/n'
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+      return 0
+    
+    if event.message.text.strip().split(',')[0] == "輸入代禱":
+      content = writeprayer(event.message.text)
+
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+      return 0
 
     if event.message.text == "選項":
       carousel_template_message = TemplateSendMessage(
