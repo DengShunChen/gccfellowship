@@ -12,6 +12,7 @@ from linebot.models import *
 from cwb_data import *
 from google_search import *
 from read_prayer import *
+from  dailybread import *
 
 app = Flask(__name__)
 
@@ -86,6 +87,14 @@ def handle_message(event):
     if event.message.text == "代禱":
       # get data
       content = readprayer()
+
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+      return 0
+
+    if event.message.text == "靈命日糧":
+      url='https://traditional-odb.org/today/'
+      db = dailybread(url)
+      content = db.get_post()
 
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
