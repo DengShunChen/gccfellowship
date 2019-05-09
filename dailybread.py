@@ -6,6 +6,8 @@ class dailybread(object):
   def __init__(self,url='https://traditional-odb.org/today/'):    
     print(url)
     self.url = url
+    self.thepage = ''
+    self.soup = ''
 
   def reflash(self):
     self.thepage = ur.urlopen(self.url)

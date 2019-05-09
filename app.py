@@ -12,7 +12,7 @@ from linebot.models import *
 from cwb_data import *
 from google_search import *
 from read_prayer import *
-from  dailybread import *
+from dailybread import *
 
 app = Flask(__name__)
 
