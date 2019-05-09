@@ -19,7 +19,7 @@ class dailybread(object):
 
   def get_post(self):
     # reloading the webpage
-    reflash()
+    self.reflash()
 
     content = ''
     # title 
