@@ -12,9 +12,11 @@ class dailybread(object):
     self.soup = BeautifulSoup(self.thepage, "html.parser")
 
   def get_title(self):
+    self.reflash()
     return self.soup.title.text
 
   def get_all(self): 
+    self.reflash()
     return self.soup.prettify()
 
   def get_post(self):
@@ -56,7 +58,7 @@ class dailybread(object):
 
 if __name__ == '__main__':
   url='https://traditional-odb.org/today/'
-  db = dailybread(url)
+  db = dailybread()
 
   print(db.get_post())
 #  print(db.get_all())
