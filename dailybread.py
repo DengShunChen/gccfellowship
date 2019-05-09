@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 def get_post():
   url='https://traditional-odb.org/today/'
-  url='https://traditional-odb.org/2019/05/02/%E6%81%86%E5%88%87%E7%A6%B1%E5%91%8A-2/'
+#  url='https://traditional-odb.org/2019/05/02/%E6%81%86%E5%88%87%E7%A6%B1%E5%91%8A-2/'
   thepage = ur.urlopen(url)
   soup = BeautifulSoup(thepage, "html.parser")
 
