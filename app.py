@@ -13,6 +13,7 @@ from cwb_data import *
 from google_search import *
 from read_prayer import *
 from dailybread import get_post as dbpost
+form ccp import get_post as ccppost
 
 app = Flask(__name__)
 
@@ -93,7 +94,11 @@ def handle_message(event):
 
     if event.message.text == "靈命日糧":
       content = dbpost()
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+      return 0
 
+    if event.message.text == "論壇報新聞":
+      content = cctpost()
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
 
