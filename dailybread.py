@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 
 class dailybread(object):
   def __init__(self,url):
+    print(url)
     self.url = url
     self.thepage = ur.urlopen(self.url)
     self.soup = BeautifulSoup(self.thepage, "html.parser")
