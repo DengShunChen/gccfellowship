@@ -13,13 +13,13 @@ def get_url():
   return url
  
 def get_post():
-  url='https://traditional-odb.org/today/'
+#  url='https://traditional-odb.org/today/'
 #  url='https://traditional-odb.org/2019/05/02/%E6%81%86%E5%88%87%E7%A6%B1%E5%91%8A-2/'
   url = get_url()
   thepage = ur.urlopen(url)
   soup = BeautifulSoup(thepage, "html.parser")
 
-  content = ''
+  content = url + '\n'
   # title 
   string = soup.h2.text
   content = content +  string + '\n'
