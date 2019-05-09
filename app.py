@@ -13,7 +13,7 @@ from cwb_data import *
 from google_search import *
 from read_prayer import *
 from dailybread import get_post as dbpost
-form ccp import get_post as ccppost
+from cct import get_post as cctpost
 
 app = Flask(__name__)
 
