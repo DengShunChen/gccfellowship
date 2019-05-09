@@ -3,9 +3,11 @@ import urllib.request as ur
 from bs4 import BeautifulSoup
 
 class dailybread(object):
-  def __init__(self,url):
+  def __init__(self,url='https://traditional-odb.org/today/'):    
     print(url)
     self.url = url
+
+  def reflash(self):
     self.thepage = ur.urlopen(self.url)
     self.soup = BeautifulSoup(self.thepage, "html.parser")
 
@@ -16,24 +18,25 @@ class dailybread(object):
     return self.soup.prettify()
 
   def get_post(self):
-    soup = self.soup
+    # reloading the webpage
+    reflash()
 
     content = ''
     # title 
-    string = soup.h2.text
+    string = self.soup.h2.text
     content = content +  string + '\n'
 
-    golden_verse=soup.find_all('div',class_="verse-box")
+    golden_verse = self.soup.find_all('div',class_="verse-box")
     for v in golden_verse:
       string = v.text
       content = content +  string + '\n'
 
-    posts=soup.find_all('div',class_="post-content")
+    posts = self.soup.find_all('div',class_="post-content")
     for v in posts:
       string = v.text
       content = content +  string + '\n'
 
-    posts = soup.find_all('p')
+    posts = self.soup.find_all('p')
     for post in posts:
       if post.text == '你必須登錄書籤':
         break

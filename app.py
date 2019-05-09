@@ -92,8 +92,7 @@ def handle_message(event):
       return 0
 
     if event.message.text == "靈命日糧":
-      url='https://traditional-odb.org/today/'
-      db = dailybread(url)
+      db = dailybread()
       content = db.get_post()
 
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
