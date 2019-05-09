@@ -12,7 +12,7 @@ from linebot.models import *
 from cwb_data import *
 from google_search import *
 from read_prayer import *
-from dailybread import *
+from dailybread import get_post as dbpost
 
 app = Flask(__name__)
 
@@ -92,8 +92,7 @@ def handle_message(event):
       return 0
 
     if event.message.text == "靈命日糧":
-      db = dailybread()
-      content = db.get_post()
+      content = dbpost()
 
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
