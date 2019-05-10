@@ -73,15 +73,18 @@ def show():
         print('No data found.')
     else:
         for row in values:
-            if row[1] == '出席':
+            if row[1].strip() == '出席':
               on = on + row[0] + ', '
-            if row[1] == '請假':
+            if row[1].strip() == '請假':
               off = off + row[0] + ', '
 
     strings = strings + '出席：%s' % (on) + '\n'
     strings = strings + '\n'
     strings = strings + '請假：%s' % (off) + '\n'
 
+    strings = strings + '建立聚會' + '\n'
+    strings = strings + '\n'
+    strings = strings + '\n'
     return strings
 
 def index_2d(myList, v):
