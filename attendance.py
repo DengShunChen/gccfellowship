@@ -81,10 +81,14 @@ def show():
     strings = strings + '出席：%s' % (on) + '\n'
     strings = strings + '\n'
     strings = strings + '請假：%s' % (off) + '\n'
+    strings = strings + '\n'
+    strings = strings + '\n'
+    strings = strings + '功能範例：' + '\n'
+    strings = strings + '新增-> 建立聚會,2019/05/18,AM10:00,教會一樓會議室,分享主題,登舜,荃滿' + '\n'
+    strings = strings + '查詢-> 顯示出席' + '\n'
+    strings = strings + '填寫-> 輸入出席,登舜家,出席' +'\n'
+    strings = strings + '\n'
 
-    strings = strings + '建立聚會' + '\n'
-    strings = strings + '\n'
-    strings = strings + '\n'
     return strings
 
 def index_2d(myList, v):
