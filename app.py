@@ -11,9 +11,12 @@ from linebot.exceptions import (
 from linebot.models import *
 from cwb_data import *
 from google_search import *
-from read_prayer import *
+from prayer import *
 from dailybread import get_post as dbpost
 from cct import get_post as cctpost
+from attendance import create as attend_create
+from attendance import show as attend_show
+from attendance import write as attend_write
 
 app = Flask(__name__)
 
@@ -112,7 +115,21 @@ def handle_message(event):
     
     if event.message.text.strip().split(',')[0] == "輸入代禱":
       content = writeprayer(event.message.text)
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+      return 0
 
+    if event.message.text.strip().split(',')[0] == "輸入出席":
+      content = attend_write(event.message.text)
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+      return 0
+
+    if event.message.text.strip().split(',')[0] == "顯示出席":
+      content = attend_show(event.message.text)
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+      return 0
+
+    if event.message.text.strip().split(',')[0] == "建立聚會":
+      content = attend_create(event.message.text)
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
 
