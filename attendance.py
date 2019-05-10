@@ -114,7 +114,7 @@ def create(text):
     ss = SpreadsheetSnippets(service)
 
     # write values
-    range_name='A%d:F%d' % (2,2)
+    range_name='A2:G2'
     result = ss.update_values(spreadsheet_id,range_name,'USER_ENTERED',_values) 
 
     # clear attendance 
