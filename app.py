@@ -10,7 +10,7 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 from cwb_data import *
-from google_search import *
+#from google_search import *
 from prayer import *
 from dailybread import get_post as dbpost
 from cct import get_post as cctpost
