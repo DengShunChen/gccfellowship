@@ -46,7 +46,7 @@ def show():
     # using SpreadsheetSnippets class
     ss = SpreadsheetSnippets(service)
 
-    range_name='A2:F2'
+    range_name='A2:G2'
     result = ss.get_values(spreadsheet_id,range_name) 
     values = result.get('values', [])
     strings=''
@@ -61,6 +61,7 @@ def show():
           strings = strings + '📜主題：%s ' % (row[3]) + '\n'
           strings = strings + '📣講員：%s ' % (row[4]) + '\n'
           strings = strings + '🎼詩歌：%s ' % (row[5]) + '\n'
+          strings = strings + '👶幼兒照顧：%s ' % (row[6]) + '\n'
  
     range_name='A4:B'
     result = ss.get_values(spreadsheet_id,range_name) 
