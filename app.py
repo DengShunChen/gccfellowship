@@ -124,7 +124,7 @@ def handle_message(event):
       return 0
 
     if event.message.text.strip().split(',')[0] == "顯示出席":
-      content = attend_show(event.message.text)
+      content = attend_show()
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
 
