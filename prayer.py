@@ -74,10 +74,10 @@ def show_results(values,spreadsheet,date=''):
                 strings = strings + '    %-4.4s: %s %s' % (row[0], date, row[1]) + '\n'
               else:
              #   print('%2.2d. %-4.4s: %s' % (r,row[0], row[1]))
-                strings = strings + '%2.2d. %-4.4s: %s' % (r,row[0], row[1]) + '\n'
+                strings = strings + '%2d. %-4.4s: %s' % (r,row[0], row[1]) + '\n'
             except:
             #  print('%2.2d. %-4.4s: %s' % (r,row[0], '<<尚未填寫>>'))
-              strings = strings + '%2.2d. %-4.4s: %s' % (r,row[0], '<<尚未填寫>>') + '\n'
+              strings = strings + '%2d. %-4.4s: %s' % (r,row[0], '<<尚未填寫>>') + '\n'
 
     strings = strings + '\n'
     strings = strings + '如需新增/更新代禱事項，請依照以下格式輸入：' + '\n'
