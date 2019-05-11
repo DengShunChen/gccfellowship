@@ -23,16 +23,15 @@ def CreateCard(text):
   font = ImageFont.load_default()
 
   # starting position of the message
-  (x, y) = (10, 10)
-  message = "我清楚人每一天的時間有限，但因著神愛我，"
-
+  (x, y) = (150, 150)
+  message = "我清楚人每一天的時間有限，但因著神愛我，\n\n就願意每天將____(幾分鐘)分別為聖，\n\n為XXX一家的需要和靈命穩定增長代禱。\n\n願神賜我智慧、愛心和耐心，真實愛我的弟兄姐妹。\n\n立約人：XXX"
   color = 'rgb(0, 0, 0)' # black color
   # draw the message on the background
  # draw.text((x, y), message, fill=color, font=font)
 
-  font = ImageFont.truetype('simsun.ttc',24)
-  draw.text( (0,50), u'你好,世界!',(0,0,0),font=font)
-  draw.text((0,60),unicode('你好','utf-8'),(0,0,0),font=font) 
+  font = ImageFont.truetype('simsun.ttc',72)
+  font = ImageFont.truetype('TPOP03B.TTF',72)
+  draw.text( (x,y), message,fill=color,font=font)
 
 
   # another characters

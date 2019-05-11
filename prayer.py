@@ -14,7 +14,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '1L-HZDaf9ZPKkXmDkdcOAOofCzCUfOydgssGiDgFuBuA'
-SAMPLE_RANGE_NAME = date+'感恩代禱事項!A:B'
+SAMPLE_RANGE_NAME = '感恩代禱事項!A:B'
 
 # The ID and range of a sample spreadsheet.
 #SAMPLE_SPREADSHEET_ID = '1Rg-n63tz5jE0Y26hXuROfzF9V2nNVPi_B1vFJvaDhCw'
