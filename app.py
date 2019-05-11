@@ -17,6 +17,7 @@ from cct import get_post as cctpost
 from attendance import create as attend_create
 from attendance import show as attend_show
 from attendance import write as attend_write
+from create_card import CreateCard
 
 app = Flask(__name__)
 
@@ -112,7 +113,16 @@ def handle_message(event):
       content = content + profile.display_name + '/n'
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
-    
+ 
+    if event.message.text.strip().split(',')[0] == "立約小卡":
+      url = CreateCard(event.message.text)
+      message = ImageSendMessage(
+        original_content_url=url,
+        preview_image_url=url
+      )
+      line_bot_api.reply_message(event.reply_token, message)
+      return 0
+   
     if event.message.text.strip().split(',')[0] == "輸入代禱":
       content = writeprayer(event.message.text)
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
