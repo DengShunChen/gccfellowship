@@ -14,13 +14,10 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '1L-HZDaf9ZPKkXmDkdcOAOofCzCUfOydgssGiDgFuBuA'
-SAMPLE_RANGE_NAME = '感恩代禱事項!A:B'
-
-# The ID and range of a sample spreadsheet.
-#SAMPLE_SPREADSHEET_ID = '1Rg-n63tz5jE0Y26hXuROfzF9V2nNVPi_B1vFJvaDhCw'
-#SAMPLE_RANGE_NAME = 'A:B'
+SAMPLE_RANGE_NAME = '感恩代禱事項!B:C'
 
 spreadsheet='https://docs.google.com/spreadsheets/d/%s/' % (SAMPLE_SPREADSHEET_ID)
+
 def build_service():
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
@@ -44,8 +41,26 @@ def build_service():
     service = build('sheets', 'v4', credentials=creds)
 
     return service 
+def get_date():
+    service = build_service()
+
+    # Call the Sheets API
+    range_name = 'A2:A2'
+    sheet = service.spreadsheets()
+    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                range=range_name).execute()
+    values = result.get('values', [])
+   
+    if not values:
+        print('No data found.')
+    else:
+        for row in values:
+          date = row[0]
+    return date
 
 def show_results(values,spreadsheet,date=''):
+
+    date = get_date()
     strings=''
     if not values:
         print('No data found.')
@@ -110,10 +125,10 @@ def writeprayer(text):
     index = index_2d(values,name)
 
     if index == None:
-      range_name='A:B'
+      range_name='B:C'
       result = ss.append_values(SAMPLE_SPREADSHEET_ID,range_name,'USER_ENTERED',_values) 
     else:        
-      range_name='A%d:B%d' % (index+1,index+1)
+      range_name='B%d:C%d' % (index+1,index+1)
       result = ss.update_values(SAMPLE_SPREADSHEET_ID,range_name,'USER_ENTERED',_values) 
 
     print(result)
@@ -127,4 +142,5 @@ def writeprayer(text):
     return strings
 
 if __name__ == '__main__':
-  print(writeprayer('輸入代禱,登舜,慕容腳皮膚感染。我消化系統不太舒服。'))
+#  print(writeprayer('輸入代禱,測試,測試代禱事項'))
+  print(readprayer())
