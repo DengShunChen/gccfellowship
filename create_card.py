@@ -40,9 +40,9 @@ def CreateCard(text):
   font = ImageFont.load_default()
 
   # starting position of the message
-  (x, y) = (150, 530)
+  (x, y) = (50, 530)
 #  message = "我清楚人每一天的時間有限，\n但因著神愛我，\n就願意每天將%s分鐘分別為聖，\n為%s一家的需要\n和靈命穩定增長代禱。\n願神賜我智慧、愛心和耐心，\n真實愛我的弟兄姐妹。\n\n立約人：%s" % (minutes, family, person)
-  message = "我清楚人每一天的時間有限\n但因著神愛我\n就願意每天將%s分鐘分別為聖\n為%s一家的需要\n和靈命穩定增長代禱\n願神賜我智慧、愛心和耐心\n真實愛我的弟兄姐妹" % (minutes, family)
+  message = "         我清楚人每一天的時間有限         \n但因著神愛我\n就願意每天將%s分鐘分別為聖\n為%s一家的需要\n和靈命穩定增長代禱\n願神賜我智慧、愛心和耐心\n真實愛我的弟兄姐妹" % (minutes, family)
   color = 'rgb(255, 255, 255)' # black color
   # draw the message on the background
  # draw.text((x, y), message, fill=color, font=font)
@@ -53,7 +53,7 @@ def CreateCard(text):
   draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='center')
 
   # starting position of the message
-  (x, y) = (420, 900)
+  (x, y) = (420, 905)
   message = "立約人：%s" % (person)
   color = 'rgb(255, 255, 255)' # black color
   # draw the message on the background
@@ -77,4 +77,4 @@ def CreateCard(text):
   return photo_link
 
 if __name__ == '__main__':
-  print(CreateCard('立約小卡,15,賀凱,荃滿'))
+  print(CreateCard('立約小卡,15,賀凱/柴傳道,荃滿'))
