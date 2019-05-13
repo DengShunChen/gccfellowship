@@ -41,24 +41,27 @@ def CreateCard(text):
 
   # starting position of the message
   (x, y) = (150, 550)
-  message = "我清楚人每一天的時間有限，\n但因著神愛我，\n就願意每天將%s分鐘分別為聖，\n為%s一家的需要\n和靈命穩定增長代禱。\n願神賜我智慧、愛心和耐心，\n真實愛我的弟兄姐妹。\n\n立約人：%s" % (minutes, family, person)
+#  message = "我清楚人每一天的時間有限，\n但因著神愛我，\n就願意每天將%s分鐘分別為聖，\n為%s一家的需要\n和靈命穩定增長代禱。\n願神賜我智慧、愛心和耐心，\n真實愛我的弟兄姐妹。\n\n立約人：%s" % (minutes, family, person)
+  message = "我清楚人每一天的時間有限\n但因著神愛我\n就願意每天將%s分鐘分別為聖\n為%s一家的需要\n和靈命穩定增長代禱\n願神賜我智慧、愛心和耐心\n真實愛我的弟兄姐妹\n\n立約人：%s" % (minutes, family, person)
   color = 'rgb(255, 255, 255)' # black color
   # draw the message on the background
  # draw.text((x, y), message, fill=color, font=font)
 
   font = ImageFont.truetype('微软雅黑粗体.ttf',36)
-  draw.text( (x,y), message,fill=color,font=font)
+#  draw.text( (x,y), message,fill=color,font=font)
+  draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='center')
 
   # another characters
-# (x, y) = (150, 150)
-# name = 'Vinay'
-# color = 'rgb(255, 255, 255)' # white color
-# draw.text((x, y), name, fill=color, font=font)
+  (x, y) = (225, 1000)
+  name = ' All Right Reseved®Young Couple Fellowship'
+  color = 'rgb(0, 0, 0)' # white color
+  font = ImageFont.truetype('微软雅黑粗体.ttf',14)
+  draw.multiline_text( (x,y), name,fill=color,font=font, spacing=5, align='center')
 
   # save the edited image
   image.save('greeting_card.png')
-  photo_link = upload_photo('greeting_card.png')
-  return photo_link
+#  photo_link = upload_photo('greeting_card.png')
+#  return photo_link
 
 if __name__ == '__main__':
   print(CreateCard('立約小卡,15,賀凱,荃滿'))
