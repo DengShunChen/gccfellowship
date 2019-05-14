@@ -54,7 +54,7 @@ def CreateCard():
  # draw.text((x, y), message, fill=color, font=font)
 # font = ImageFont.truetype('微软雅黑粗体.ttf',36)
 # font = ImageFont.truetype('HanyiSenty.ttf',52)
-  font = ImageFont.truetype('./font/SentyGoldenBell.ttf',36)
+  font = ImageFont.truetype('./font/SentyGoldenBell.ttf',38)
 #  draw.text( (x,y), message,fill=color,font=font)
   draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='center')
 
@@ -71,7 +71,7 @@ def CreateCard():
   draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='right')
 
   # another characters
-  (x, y) = (400, 370)
+  (x, y) = (350, 370)
   name = ' All Right Reseved®Young Couple Fellowship'
   color = 'rgb(255, 255, 255)' # white color
   color = 'rgb(0, 0, 0)' # black color
