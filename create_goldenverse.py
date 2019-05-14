@@ -25,7 +25,8 @@ def upload_photo(photo_path):
 def CreateCard():
 
   verse_id = random.randint(0,49)
-  bkgd = './picture/天空.jpg'
+  bkgds_id = random.randint(0,5)
+  bkgd = './picture/背景%2.2d.jpg' % (bkgds_id)
 
   with open('goldenverse.json', 'r') as f :
     verses = json.load(f)
@@ -53,8 +54,8 @@ def CreateCard():
   # draw the message on the background
  # draw.text((x, y), message, fill=color, font=font)
 # font = ImageFont.truetype('微软雅黑粗体.ttf',36)
-# font = ImageFont.truetype('HanyiSenty.ttf',52)
-  font = ImageFont.truetype('./font/SentyGoldenBell.ttf',38)
+  font = ImageFont.truetype('./font/HanyiSentyTang.ttf',52)
+#  font = ImageFont.truetype('./font/SentyGoldenBell.ttf',38)
 #  draw.text( (x,y), message,fill=color,font=font)
   draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='center')
 
@@ -75,14 +76,14 @@ def CreateCard():
   name = ' All Right Reseved®Young Couple Fellowship'
   color = 'rgb(255, 255, 255)' # white color
   color = 'rgb(0, 0, 0)' # black color
-#  font = ImageFont.truetype('SentySnowMountain.ttf',14)
+#  font = ImageFont.truetype('./font/SentySnowMountain.ttf',14)
   font = ImageFont.truetype('./font/微软雅黑粗体.ttf',14)
   draw.multiline_text( (x,y), name,fill=color,font=font, spacing=5, align='center')
 
   # save the edited image
   image.save('verse_card.png')
-  photo_link = upload_photo('verse_card.png')
-  return photo_link
+#  photo_link = upload_photo('verse_card.png')
+#  return photo_link
 
 if __name__ == '__main__':
   print(CreateCard())
