@@ -82,8 +82,8 @@ def CreateCard():
 
   # save the edited image
   image.save('verse_card.png')
-#  photo_link = upload_photo('verse_card.png')
-#  return photo_link
+  photo_link = upload_photo('verse_card.png')
+  return photo_link
 
 if __name__ == '__main__':
   print(CreateCard())
