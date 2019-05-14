@@ -3,6 +3,8 @@
 # import required classes
 from PIL import Image, ImageDraw, ImageFont
 from imgurpython import ImgurClient
+import json
+import random
 
 def upload_photo(photo_path):
   client_id = '1abfc96a9fd1cc6'
@@ -20,15 +22,19 @@ def upload_photo(photo_path):
   print("Done")    
   return image['link']
 
+def CreateCard():
 
-def CreateCard(text):
-  textlist=text.strip().split(',')
-  minutes = textlist[1]
-  family = textlist[2]
-  person = textlist[3]
+  verse_id = random.randint(0,49)
+  bkgd = './picture/天空.jpg'
 
+  with open('goldenverse.json', 'r') as f :
+    verses = json.load(f)
+#    print(verses) 
+ 
+  verses = verses['金句']
+ 
   # create Image object with the input image
-  image = Image.open('./picture/禱告手.jpg')
+  image = Image.open(bkgd)
 
   # initialise the drawing context with
   # the image object as background
@@ -40,10 +46,10 @@ def CreateCard(text):
   font = ImageFont.load_default()
 
   # starting position of the message
-  (x, y) = (50, 530)
-#  message = "我清楚人每一天的時間有限，\n但因著神愛我，\n就願意每天將%s分鐘分別為聖，\n為%s一家的需要\n和靈命穩定增長代禱。\n願神賜我智慧、愛心和耐心，\n真實愛我的弟兄姐妹。\n\n立約人：%s" % (minutes, family, person)
-  message = "         我清楚人每一天的時間有限         \n但因著神愛我\n就願意每天將%s分鐘分別為聖\n為%s一家的需要\n和靈命穩定增長代禱\n願神賜我智慧、愛心和耐心\n真實愛我的弟兄姐妹" % (minutes, family)
-  color = 'rgb(255, 255, 255)' # black color
+  (x, y) = (100, 150)
+  message = verses[verse_id]['content'] 
+  color = 'rgb(255, 255, 255)' # white color
+#  color = 'rgb(0, 0, 0)' # black color
   # draw the message on the background
  # draw.text((x, y), message, fill=color, font=font)
 # font = ImageFont.truetype('微软雅黑粗体.ttf',36)
@@ -53,9 +59,10 @@ def CreateCard(text):
   draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='center')
 
   # starting position of the message
-  (x, y) = (420, 905)
-  message = "立約人：%s" % (person)
-  color = 'rgb(255, 255, 255)' # black color
+  (x, y) = (700, 200)
+  message = verses[verse_id]['verse']
+  color = 'rgb(255, 255, 255)' # white color
+#  color = 'rgb(0, 0, 0)' # black color
   # draw the message on the background
  # draw.text((x, y), message, fill=color, font=font)
 # font = ImageFont.truetype('微软雅黑粗体.ttf',36)
@@ -64,17 +71,18 @@ def CreateCard(text):
   draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='right')
 
   # another characters
-  (x, y) = (240, 1000)
+  (x, y) = (400, 370)
   name = ' All Right Reseved®Young Couple Fellowship'
-  color = 'rgb(0, 0, 0)' # white color
+  color = 'rgb(255, 255, 255)' # white color
+  color = 'rgb(0, 0, 0)' # black color
 #  font = ImageFont.truetype('SentySnowMountain.ttf',14)
   font = ImageFont.truetype('./font/微软雅黑粗体.ttf',14)
   draw.multiline_text( (x,y), name,fill=color,font=font, spacing=5, align='center')
 
   # save the edited image
-  image.save('greeting_card.png')
-  photo_link = upload_photo('greeting_card.png')
+  image.save('verse_card.png')
+  photo_link = upload_photo('verse_card.png')
   return photo_link
 
 if __name__ == '__main__':
-  print(CreateCard('立約小卡,15,賀凱/柴傳道,荃滿'))
+  print(CreateCard())
