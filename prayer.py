@@ -70,15 +70,14 @@ def show_results(values,spreadsheet,date=''):
             # Print columns A and E, which correspond to indices 0 and 4.
             try:
               if r == 0:
-              #  print('    %-4.4s: %s %s' % (row[0], row[1]),date)
                 strings = strings + spreadsheet + '\n'
-                strings = strings + '%s  %-4.4s: %s' % (date, row[0], row[1]) + '\n'
+                strings = strings + '%s  %s' % (date, '感恩代禱事項') + '\n'
+                strings = strings + '%2d. %-4.4s: %s' % (r+1,row[0], row[1]) + '\n'
               else:
-             #   print('%2.2d. %-4.4s: %s' % (r,row[0], row[1]))
-                strings = strings + '%2d. %-4.4s: %s' % (r,row[0], row[1]) + '\n'
+                strings = strings + '%2d. %-4.4s: %s' % (r+1,row[0], row[1]) + '\n'
             except:
             #  print('%2.2d. %-4.4s: %s' % (r,row[0], '<<尚未填寫>>'))
-              strings = strings + '%2d. %-4.4s: %s' % (r,row[0], '<<尚未填寫>>') + '\n'
+              strings = strings + '%2d. %-4.4s: %s' % (r+1,row[0], '<<尚未填寫>>') + '\n'
 
     strings = strings + '\n'
     strings = strings + '如需新增/更新代禱事項，請依照以下格式輸入：' + '\n'
@@ -91,10 +90,11 @@ def readprayer():
     """
     service = build_service()
 
+    range_name='B2:C'
     # Call the Sheets API
     sheet = service.spreadsheets()
     result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                                range=SAMPLE_RANGE_NAME).execute()
+                                range=range_name).execute()
     values = result.get('values', [])
 
     strings = show_results(values,spreadsheet)
