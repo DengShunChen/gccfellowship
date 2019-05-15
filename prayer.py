@@ -117,8 +117,9 @@ def writeprayer(text):
     # using SpreadsheetSnippets class
     ss = SpreadsheetSnippets(service)
 
+    range_name='B:C'
     # check out exist file
-    result = ss.get_values(SAMPLE_SPREADSHEET_ID,SAMPLE_RANGE_NAME) 
+    result = ss.get_values(SAMPLE_SPREADSHEET_ID,range_name) 
     values = result.get('values', [])
  
     # check name is exist or not?

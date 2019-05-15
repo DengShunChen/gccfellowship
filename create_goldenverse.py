@@ -36,8 +36,8 @@ def CreateCard():
 
   with open('goldenverse.json', 'r') as f :
     verses = json.load(f)
-#    print(verses) 
- 
+
+  # 使用金句 
   verses = verses['金句']
  
   # create Image object with the input image
@@ -54,31 +54,25 @@ def CreateCard():
   # starting position of the message
   (x, y) = (100, 150)
   message = verses[verse_id]['content'] 
-  print(len(message))
+
+#  print(len(message))
   if len(message) > 18:
     fontsize=42
   else:
     fontsize=52
  
   # draw the message on the background
- # draw.text((x, y), message, fill=color, font=font)
 # font = ImageFont.truetype('微软雅黑粗体.ttf',36)
   font = ImageFont.truetype('./font/HanyiSentyTang.ttf',fontsize)
-#  font = ImageFont.truetype('./font/SentyGoldenBell.ttf',38)
-#  draw.text( (x,y), message,fill=color,font=font)
+# font = ImageFont.truetype('./font/SentyGoldenBell.ttf',38)
   draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='center')
 
   # starting position of the message
   (x, y) = (700, 200)
   message = verses[verse_id]['verse']
-#  color = 'rgb(255, 255, 255)' # white color
-#  color = 'rgb(0, 0, 0)' # black color
-  # draw the message on the background
- # draw.text((x, y), message, fill=color, font=font)
-# font = ImageFont.truetype('微软雅黑粗体.ttf',36)
   fontsize=42
+# font = ImageFont.truetype('微软雅黑粗体.ttf',36)
   font = ImageFont.truetype('./font/SentySnowMountain.ttf',fontsize)
-#  draw.text( (x,y), message,fill=color,font=font)
   draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='right')
 
   # another characters
@@ -92,7 +86,8 @@ def CreateCard():
   else:
     color = 'rgb(0, 0, 0)' # black color
 
-  font = ImageFont.truetype('./font/SentySnowMountain.ttf',18)
+  fontsize=18
+  font = ImageFont.truetype('./font/SentySnowMountain.ttf',fontsize)
 #  font = ImageFont.truetype('./font/微软雅黑粗体.ttf',14)
 #  font = ImageFont.truetype('./font/SentyGoldenBell.ttf',38)
   draw.multiline_text( (x,y), name,fill=color,font=font, spacing=5, align='center')
