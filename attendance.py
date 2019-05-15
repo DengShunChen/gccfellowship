@@ -86,8 +86,8 @@ def show():
     strings = strings + '\n'
     strings = strings + '功能範例：' + '\n'
     strings = strings + '新增-> 建立聚會,2019/05/18,AM10:00,教會一樓會議室,分享主題,講員,詩歌,幼兒照顧' + '\n'
-    strings = strings + '查詢-> 顯示出席' + '\n'
-    strings = strings + '填寫-> 輸入出席,登舜家,出席' +'\n'
+    strings = strings + '查詢-> 出席' + '\n'
+    strings = strings + '填寫-> 出席,登舜家,出席/請假' +'\n'
     strings = strings + '\n'
 
     return strings
