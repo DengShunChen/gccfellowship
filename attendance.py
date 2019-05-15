@@ -77,7 +77,7 @@ def show():
             if row[1].strip() == '出席':
               on = on + row[0] + ', '
             else:
-              off = off + row[0] + row[1][2:]', '
+              off = off + row[0] + row[1][2:] + ', '
 
     strings = strings + '出席：%s' % (on) + '\n'
     strings = strings + '\n'
