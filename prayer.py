@@ -72,7 +72,7 @@ def show_results(values,spreadsheet,date=''):
               if r == 0:
               #  print('    %-4.4s: %s %s' % (row[0], row[1]),date)
                 strings = strings + spreadsheet + '\n'
-                strings = strings + '    %-4.4s: %s %s' % (row[0], date, row[1]) + '\n'
+                strings = strings + '%s  %-4.4s: %s' % (date, row[0], row[1]) + '\n'
               else:
              #   print('%2.2d. %-4.4s: %s' % (r,row[0], row[1]))
                 strings = strings + '%2d. %-4.4s: %s' % (r,row[0], row[1]) + '\n'
