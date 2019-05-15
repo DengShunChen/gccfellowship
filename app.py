@@ -90,10 +90,18 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
 
-    if event.message.text == "代禱":
-      # get data
-      content = readprayer()
+    if event.message.text.strip().split(',')[0] == "代禱":
+      if len(event.message.text.strip().split(',')) == 1:
+        content = readprayer()
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+        return 0
+      else:
+        content = writeprayer(event.message.text)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+        return 0
 
+    if event.message.text.strip().split(',')[0] == "輸入代禱":
+      content = writeprayer(event.message.text)
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
 
@@ -133,10 +141,6 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token, message)
       return 0
    
-    if event.message.text.strip().split(',')[0] == "輸入代禱":
-      content = writeprayer(event.message.text)
-      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-      return 0
 
     if event.message.text.strip().split(',')[0] == "輸入出席":
       content = attend_write(event.message.text)
