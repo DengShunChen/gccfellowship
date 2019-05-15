@@ -23,10 +23,16 @@ def upload_photo(photo_path):
   return image['link']
 
 def CreateCard():
-
   verse_id = random.randint(0,99)
   bkgds_id = random.randint(0,12)
   bkgd = './picture/背景%2.2d.jpg' % (bkgds_id)
+
+  # character color 
+  blacklist = [1, 2, 6, 7, 8, 9, 10,  11]
+  if bkgds_id in blacklist :
+    color = 'rgb(0, 0, 0)' # black color
+  else:
+    color = 'rgb(255, 255, 255)' # white color
 
   with open('goldenverse.json', 'r') as f :
     verses = json.load(f)
@@ -43,18 +49,21 @@ def CreateCard():
 
   # create font object with the font file and specify
   # desired size
-  #font = ImageFont.truetype(size=14)
   font = ImageFont.load_default()
 
   # starting position of the message
   (x, y) = (100, 150)
   message = verses[verse_id]['content'] 
-  color = 'rgb(255, 255, 255)' # white color
-#  color = 'rgb(0, 0, 0)' # black color
+  print(len(message))
+  if len(message) > 18:
+    fontsize=42
+  else:
+    fontsize=52
+ 
   # draw the message on the background
  # draw.text((x, y), message, fill=color, font=font)
 # font = ImageFont.truetype('微软雅黑粗体.ttf',36)
-  font = ImageFont.truetype('./font/HanyiSentyTang.ttf',52)
+  font = ImageFont.truetype('./font/HanyiSentyTang.ttf',fontsize)
 #  font = ImageFont.truetype('./font/SentyGoldenBell.ttf',38)
 #  draw.text( (x,y), message,fill=color,font=font)
   draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='center')
@@ -62,22 +71,30 @@ def CreateCard():
   # starting position of the message
   (x, y) = (700, 200)
   message = verses[verse_id]['verse']
-  color = 'rgb(255, 255, 255)' # white color
+#  color = 'rgb(255, 255, 255)' # white color
 #  color = 'rgb(0, 0, 0)' # black color
   # draw the message on the background
  # draw.text((x, y), message, fill=color, font=font)
 # font = ImageFont.truetype('微软雅黑粗体.ttf',36)
-  font = ImageFont.truetype('./font/SentySnowMountain.ttf',42)
+  fontsize=42
+  font = ImageFont.truetype('./font/SentySnowMountain.ttf',fontsize)
 #  draw.text( (x,y), message,fill=color,font=font)
   draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='right')
 
   # another characters
   (x, y) = (350, 370)
-  name = ' All Right Reseved®Young Couple Fellowship'
-  color = 'rgb(255, 255, 255)' # white color
-  color = 'rgb(0, 0, 0)' # black color
-#  font = ImageFont.truetype('./font/SentySnowMountain.ttf',14)
-  font = ImageFont.truetype('./font/微软雅黑粗体.ttf',14)
+  name = 'Young Couple Fellowship X Glory Christian Church'
+
+  # character color 
+  whitelist = [0, 4, 11, 12]
+  if bkgds_id in whitelist :
+    color = 'rgb(255, 255, 255)' # white color
+  else:
+    color = 'rgb(0, 0, 0)' # black color
+
+  font = ImageFont.truetype('./font/SentySnowMountain.ttf',18)
+#  font = ImageFont.truetype('./font/微软雅黑粗体.ttf',14)
+#  font = ImageFont.truetype('./font/SentyGoldenBell.ttf',38)
   draw.multiline_text( (x,y), name,fill=color,font=font, spacing=5, align='center')
 
   # save the edited image
