@@ -166,7 +166,7 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
 
-    if event.message.text == "選項":
+    if event.message.text == "天氣":
       carousel_template_message = TemplateSendMessage(
           alt_text='目錄 contains',
           template=CarouselTemplate(
