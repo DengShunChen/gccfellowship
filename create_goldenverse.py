@@ -24,8 +24,8 @@ def upload_photo(photo_path):
 
 def CreateCard():
 
-  verse_id = random.randint(0,49)
-  bkgds_id = random.randint(0,5)
+  verse_id = random.randint(0,99)
+  bkgds_id = random.randint(0,12)
   bkgd = './picture/背景%2.2d.jpg' % (bkgds_id)
 
   with open('goldenverse.json', 'r') as f :
