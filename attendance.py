@@ -131,9 +131,6 @@ def write(text):
     textlist=text.strip().split(',')
     name = textlist[1]
     onoroff = textlist[2]
- 
-    if onoroff != '請假':
-      onoroff = '出席'
 
     _values = [[name,onoroff]]
 
