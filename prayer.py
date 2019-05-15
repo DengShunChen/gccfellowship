@@ -1,3 +1,4 @@
+#!/usr/bin/env python 
 from __future__ import print_function
 import pickle
 import os.path
@@ -103,6 +104,7 @@ def index_2d(myList, v):
     for i, x in enumerate(myList):
         if v in x:
             return i
+    return i+1
 
 def writeprayer(text):
     # input text
@@ -125,11 +127,10 @@ def writeprayer(text):
     # check name is exist or not?
     index = index_2d(values,name)
 
+    range_name='B%d:C%d' % (index+1,index+1)
     if index == None:
-      range_name='B:C'
       result = ss.append_values(SAMPLE_SPREADSHEET_ID,range_name,'USER_ENTERED',_values) 
     else:        
-      range_name='B%d:C%d' % (index+1,index+1)
       result = ss.update_values(SAMPLE_SPREADSHEET_ID,range_name,'USER_ENTERED',_values) 
 
     print(result)
@@ -143,5 +144,5 @@ def writeprayer(text):
     return strings
 
 if __name__ == '__main__':
-#  print(writeprayer('輸入代禱,測試,測試代禱事項'))
-  print(readprayer())
+  print(writeprayer('輸入代禱,測試,測試代禱事項'))
+#  print(readprayer())
