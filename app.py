@@ -18,6 +18,7 @@ from attendance import create as attend_create
 from attendance import show as attend_show
 from attendance import write as attend_write
 from create_card import CreateCard as commitment
+from create_card import show as show_temp
 from create_goldenverse import CreateCard as goldenverse
 
 app = Flask(__name__)
@@ -124,13 +125,19 @@ def handle_message(event):
       return 0
  
     if event.message.text.strip().split(',')[0] == "立約小卡":
-      url = commitment(event.message.text)
-      message = ImageSendMessage(
-        original_content_url=url,
-        preview_image_url=url
-      )
-      line_bot_api.reply_message(event.reply_token, message)
-      return 0
+
+      if len(event.message.text.strip().split(',')) == 1:
+        content = show_temp()
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+        return 0
+      else:
+        url = commitment(event.message.text)
+        message = ImageSendMessage(
+          original_content_url=url,
+          preview_image_url=url
+        )
+        line_bot_api.reply_message(event.reply_token, message)
+        return 0
  
     if event.message.text == "金句":
       url = goldenverse()
