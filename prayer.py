@@ -72,12 +72,12 @@ def show_results(values,spreadsheet,date=''):
               if r == 0:
                 strings = strings + spreadsheet + '\n'
                 strings = strings + '%s  %s' % (date, '感恩代禱事項') + '\n'
-                strings = strings + '%2d. %-4.4s: %s' % (r+1,row[0], row[1]) + '\n'
+                strings = strings + '%2d. %-4s: %s' % (r+1,row[0], row[1]) + '\n'
               else:
-                strings = strings + '%2d. %-4.4s: %s' % (r+1,row[0], row[1]) + '\n'
+                strings = strings + '%2d. %-4s: %s' % (r+1,row[0], row[1]) + '\n'
             except:
             #  print('%2.2d. %-4.4s: %s' % (r,row[0], '<<尚未填寫>>'))
-              strings = strings + '%2d. %-4.4s: %s' % (r+1,row[0], '<<尚未填寫>>') + '\n'
+              strings = strings + '%2d. %-4s: %s' % (r+1,row[0], '<<尚未填寫>>') + '\n'
 
     strings = strings + '\n'
     strings = strings + '如需新增/更新代禱事項，請依照以下格式輸入：' + '\n'
@@ -144,5 +144,5 @@ def writeprayer(text):
     return strings
 
 if __name__ == '__main__':
-  print(writeprayer('輸入代禱,測試,測試代禱事項'))
-#  print(readprayer())
+#  print(writeprayer('輸入代禱,測試,測試代禱事項'))
+  print(readprayer())
