@@ -66,19 +66,19 @@ def CreateCard(propose='金句'):
     fontsize=43
     verse_y = 220
     content_x = 60
-    content_y = 110
+    content_y = 140
   elif len(message) > 45 and len(message) <= 65 :
     fontsize=40
-    verse_y = 240
+    verse_y = 230
     content_x = 60
-    content_y = 90
+    content_y = 130
   else:
     fontsize=38
     verse_y = 260
     content_x = 60
-    content_y = 70
+    content_y = 130
  
-  (x, y) = (content_x, 150)
+  (x, y) = (content_x, content_y)
   # draw the message on the background
 # font = ImageFont.truetype('微软雅黑粗体.ttf',36)
   font = ImageFont.truetype('./font/HanyiSentyTang.ttf',fontsize)
@@ -93,11 +93,6 @@ def CreateCard(propose='金句'):
   else:
     fontsize = 34
     verse_x = 650
-
-  # character color 
-  whitelist = [8]
-  if bkgds_id in whitelist :
-    color = 'rgb(255, 255, 255)' # white color
 
   (x, y) = (verse_x, verse_y)
 # font = ImageFont.truetype('微软雅黑粗体.ttf',36)
@@ -127,4 +122,4 @@ def CreateCard(propose='金句'):
   return photo_link
 
 if __name__ == '__main__':
-  print(CreateCard('安慰'))
+  print(CreateCard('醫治'))
