@@ -141,7 +141,7 @@ def handle_message(event):
  
     if event.message.text == "金句":
       url = goldenverse()
-      message = imagesendmessage(
+      message = Imagesendmessage(
         original_content_url=url,
         preview_image_url=url
       )
@@ -150,7 +150,7 @@ def handle_message(event):
  
     if event.message.text == "讚美主":
       url = goldenverse('讚美')
-      message = imagesendmessage(
+      message = Imagesendmessage(
         original_content_url=url,
         preview_image_url=url
       )
@@ -159,7 +159,7 @@ def handle_message(event):
  
     if event.message.text == "求安慰":
       url = goldenverse('安慰')
-      message = imagesendmessage(
+      message = Imagesendmessage(
         original_content_url=url,
         preview_image_url=url
       )
