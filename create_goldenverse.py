@@ -94,6 +94,11 @@ def CreateCard(propose='金句'):
     fontsize = 34
     verse_x = 650
 
+  # character color 
+  whitelist = [8]
+  if bkgds_id in whitelist :
+    color = 'rgb(255, 255, 255)' # white color
+
   (x, y) = (verse_x, verse_y)
 # font = ImageFont.truetype('微软雅黑粗体.ttf',36)
   font = ImageFont.truetype('./font/SentySnowMountain.ttf',fontsize)
