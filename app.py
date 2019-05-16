@@ -141,7 +141,25 @@ def handle_message(event):
  
     if event.message.text == "金句":
       url = goldenverse()
-      message = ImageSendMessage(
+      message = imagesendmessage(
+        original_content_url=url,
+        preview_image_url=url
+      )
+      line_bot_api.reply_message(event.reply_token, message)
+      return 0
+ 
+    if event.message.text == "讚美主":
+      url = goldenverse('讚美')
+      message = imagesendmessage(
+        original_content_url=url,
+        preview_image_url=url
+      )
+      line_bot_api.reply_message(event.reply_token, message)
+      return 0
+ 
+    if event.message.text == "求安慰":
+      url = goldenverse('安慰')
+      message = imagesendmessage(
         original_content_url=url,
         preview_image_url=url
       )

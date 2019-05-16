@@ -22,8 +22,7 @@ def upload_photo(photo_path):
   print("Done")    
   return image['link']
 
-def CreateCard():
-  verse_id = random.randint(0,99)
+def CreateCard(propose='金句'):
   bkgds_id = random.randint(0,12)
   bkgd = './picture/背景%2.2d.jpg' % (bkgds_id)
 
@@ -38,8 +37,11 @@ def CreateCard():
     verses = json.load(f)
 
   # 使用金句 
-  verses = verses['金句']
- 
+  verses = verses[propose]
+
+  # random selecte 
+  verse_id = random.randint(0,len(verses)-1)
+
   # create Image object with the input image
   image = Image.open(bkgd)
 
@@ -52,25 +54,47 @@ def CreateCard():
   font = ImageFont.load_default()
 
   # starting position of the message
-  (x, y) = (100, 150)
   message = verses[verse_id]['content'] 
 
 #  print(len(message))
-  if len(message) > 18:
-    fontsize=42
+  if len(message) <= 18:
+    fontsize = 52
+    verse_y = 190
+    content_x = 75
+    content_y = 150
+  elif len(message) > 18 and len(message) <= 45 :
+    fontsize=43
+    verse_y = 220
+    content_x = 60
+    content_y = 110
+  elif len(message) > 45 and len(message) <= 65 :
+    fontsize=40
+    verse_y = 240
+    content_x = 60
+    content_y = 90
   else:
-    fontsize=52
+    fontsize=38
+    verse_y = 260
+    content_x = 60
+    content_y = 70
  
+  (x, y) = (content_x, 150)
   # draw the message on the background
 # font = ImageFont.truetype('微软雅黑粗体.ttf',36)
   font = ImageFont.truetype('./font/HanyiSentyTang.ttf',fontsize)
 # font = ImageFont.truetype('./font/SentyGoldenBell.ttf',38)
-  draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='center')
+  draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='left')
 
   # starting position of the message
-  (x, y) = (700, 200)
   message = verses[verse_id]['verse']
-  fontsize=42
+  if len(message) <= 6:
+    fontsize = 40
+    verse_x = 750
+  else:
+    fontsize = 34
+    verse_x = 650
+
+  (x, y) = (verse_x, verse_y)
 # font = ImageFont.truetype('微软雅黑粗体.ttf',36)
   font = ImageFont.truetype('./font/SentySnowMountain.ttf',fontsize)
   draw.multiline_text( (x,y), message,fill=color,font=font, spacing=5, align='right')
@@ -80,13 +104,13 @@ def CreateCard():
   name = 'Young Couple Fellowship X Glory Christian Church'
 
   # character color 
-  whitelist = [0, 4, 11, 12]
+  whitelist = [0, 8, 4, 5, 11, 12]
   if bkgds_id in whitelist :
     color = 'rgb(255, 255, 255)' # white color
   else:
     color = 'rgb(0, 0, 0)' # black color
 
-  fontsize=18
+  fontsize=16
   font = ImageFont.truetype('./font/SentySnowMountain.ttf',fontsize)
 #  font = ImageFont.truetype('./font/微软雅黑粗体.ttf',14)
 #  font = ImageFont.truetype('./font/SentyGoldenBell.ttf',38)
@@ -98,4 +122,4 @@ def CreateCard():
   return photo_link
 
 if __name__ == '__main__':
-  print(CreateCard())
+  print(CreateCard('安慰'))
