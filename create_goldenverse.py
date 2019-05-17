@@ -2,25 +2,9 @@
 
 # import required classes
 from PIL import Image, ImageDraw, ImageFont
-from imgurpython import ImgurClient
 import json
 import random
-
-def upload_photo(photo_path):
-  client_id = '1abfc96a9fd1cc6'
-  client_secret = 'b90e27ab19ee4f3893c4442c2a4a3fba9035f0d0'
-  access_token = '0cd8b2fe6740013637b3c1fd62954237540d4529'
-  refresh_token = '0811df48b103bbdb19fdaeec1b4f5912bf8e8319'
-  client = ImgurClient(client_id, client_secret, access_token, refresh_token)
-  album = None # You can also enter an album ID here
-  config = {
-    'album': album,
-  }
-
-  print("Uploading image... ")
-  image = client.upload_from_path(photo_path, config=config, anon=False)
-  print("Done")    
-  return image['link']
+from tools import Toolbox 
 
 def CreateCard(propose='金句'):
   bkgds_id = random.randint(0,12)
@@ -118,7 +102,9 @@ def CreateCard(propose='金句'):
 
   # save the edited image
   image.save('verse_card.png')
-  photo_link = upload_photo('verse_card.png')
+
+  tb = Toolbox()
+  photo_link = tb.upload_photo('verse_card.png')
   return photo_link
 
 if __name__ == '__main__':
