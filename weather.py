@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from tools import Toolbox
 
+tb = Toolbox()
 def radar():
   url = 'https://www.cwb.gov.tw/Data/radar/CV1_TW_1000.png'
   tb.download_image(url,'./radar.png')
