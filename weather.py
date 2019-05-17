@@ -19,3 +19,9 @@ def satellite():
   tb.download_image(url,'./satellite.jpg')
   url = tb.upload_photo('./satellite.jpg')
   return url
+
+def rain():
+  url = 'https://www.cwb.gov.tw/Data/rainfall/QZJ.jpg'
+  tb.download_image(url,'./rain.jpg')
+  url = tb.upload_photo('./rain.jpg')
+  return url
