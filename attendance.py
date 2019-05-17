@@ -99,6 +99,8 @@ def index_2d(myList, v):
 
 def create(text):
     textlist=text.strip().split(',')
+    if len(textlist) != 7:
+      return '主席好！請依照以下方式建立聚會喔:)\n建立聚會,2019/05/18,AM10:00,教會一樓會議室,分享主題,講員,詩歌,幼兒照顧'
     date = textlist[1]
     time = textlist[2]
     position = textlist[3]
@@ -166,5 +168,6 @@ def write(text):
 if __name__ == '__main__':
 
 #  print(create('建立聚會,2019/05/11,AM 10:00,教會一樓會議室,婚姻輔導課程分享與實作,嘉玲,逸農'))
+  print(create('建立聚會,婚姻輔導課程分享與實作,嘉玲,逸農'))
 #  print(show())
-   print(write('聚會,天才家,請假'))
+#   print(write('聚會,天才家,請假'))
