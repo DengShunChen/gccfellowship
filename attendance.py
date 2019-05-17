@@ -111,7 +111,7 @@ def index_2d(myList, v):
 def create(text):
     textlist=text.strip().split(',')
     if len(textlist) != 8 and (len(textlist) != 3 or textlist[2] != '暫停'):
-      return '主席好！請依照以下方式建立聚會喔:)\n新增聚會：建立聚會,2019/MM/DD,AM10:00,教會一樓會議室,分享主題,講員,詩歌,幼兒照顧\n暫停聚會：建立聚會,2019/MM/DD,暫停'
+      return '團契主席好！請依照以下方式建立聚會喔:)\n新增聚會：建立聚會,2019/MM/DD,AM10:00,教會一樓會議室,分享主題,講員,詩歌,幼兒照顧\n暫停聚會：建立聚會,2019/MM/DD,暫停'
 
     if len(textlist) == 8:
       date = textlist[1]
@@ -176,7 +176,7 @@ def write(text):
 
     for row in values:
       if row[1] == '暫停':
-        strings = '%s您好，%s 喜樂家庭團契聚會 暫停一次' % (name,row[0]) + '\n'
+        strings = '%s平安，很抱歉唷！%s 喜樂家庭團契聚會 暫停一次！' % (name,row[0]) + '\n'
         return strings
     
     # check name is exist or not?

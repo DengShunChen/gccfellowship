@@ -111,7 +111,7 @@ def writeprayer(text):
     textlist=text.strip().split(',')
 
     if len(textlist) != 3:
-      return 'Hi 你好，請依照以下格式輸入代禱事項：\n代禱,姓名,代禱事項'
+      return 'Hi 你好，想輸入代禱事項嗎？請依照以下格式輸入唷...\n代禱,姓名,代禱事項'
     name = textlist[1]
     prayer = textlist[2]
 
