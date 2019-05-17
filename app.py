@@ -208,7 +208,7 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token, message)
       return 0
    
-    if event.message.text.strip().split(',')[0] == "出席":
+    if event.message.text.strip().split(',')[0] == "聚會":
       if len(event.message.text.strip().split(',')) == 1:
         content = attend_show()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
@@ -218,12 +218,12 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
         return 0  
 
-    if event.message.text.strip().split(',')[0] == "輸入出席":
+    if event.message.text.strip().split(',')[0] == "輸入聚會":
       content = attend_write(event.message.text)
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
 
-    if event.message.text.strip().split(',')[0] == "顯示出席":
+    if event.message.text.strip().split(',')[0] == "顯示聚會":
       content = attend_show()
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
