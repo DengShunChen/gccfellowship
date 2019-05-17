@@ -7,6 +7,9 @@ class Toolbox():
     print('Using Toolbox')
 
   def download_image(self,image_url,image_name):
+    urllib.request.urlretrieve(image_url,image_name) 
+
+  def download_image(self,image_url,image_name):
     print("Downloading image... ")
     img_data = ur.get(image_url).content
     with open(image_name, 'wb') as handler:
