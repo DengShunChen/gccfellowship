@@ -25,7 +25,7 @@ def satellite(parea = '東亞',pchan = '色調強化'):
   else:
     size = area[parea][1]
 
-  filename = '%s_%s_%s' % (area[parea][0],chan[pchan],area[parea][1])
+  filename = '%s_%s_%s' % (area[parea][0],chan[pchan],size)
   url = 'https://www.cwb.gov.tw/Data/satellite/%s/%s.jpg' % (filename,filename)
   print(url)
 
