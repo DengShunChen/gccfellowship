@@ -14,3 +14,8 @@ def temp():
   url = tb.upload_photo('./temp.jpg')
   return url
 
+def satellite():
+  url = 'https://www.cwb.gov.tw/Data/satellite/LCC_VIS_TRGB_1000/LCC_VIS_TRGB_1000.jpg'
+  tb.download_image(url,'./satellite.jpg')
+  url = tb.upload_photo('./satellite.jpg')
+  return url

@@ -53,7 +53,6 @@ def callback():
 def handle_message(event):
     #message = TextSendMessage(text=event.message.text)
     if event.message.text == "雷達":
-      
       url = radar()
       message = ImageSendMessage(
         original_content_url=url,
@@ -63,8 +62,16 @@ def handle_message(event):
       return 0
 
     if event.message.text == "氣溫":
-
       url = temp()
+      message = ImageSendMessage(
+        original_content_url=url,
+        preview_image_url=url
+      )
+      line_bot_api.reply_message(event.reply_token, message)
+      return 0
+
+    if event.message.text == "衛星雲圖":
+      url = satellite()
       message = ImageSendMessage(
         original_content_url=url,
         preview_image_url=url
