@@ -3,8 +3,6 @@ import urllib.request as ur
 from imgurpython import ImgurClient
 
 class Toolbox():
-  def __init__(self):
-    print('Using Toolbox')
 
   def download_image(self,image_url,image_name):
     print("Downloading image... ")

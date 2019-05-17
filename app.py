@@ -21,6 +21,7 @@ from create_card import CreateCard as commitment
 from create_card import show as show_temp
 from create_goldenverse import CreateCard as goldenverse
 from weather import *
+from alert import show_alert, read_json
 
 app = Flask(__name__)
 
@@ -129,6 +130,13 @@ def handle_message(event):
 
     if event.message.text == "靈命日糧":
       content = dbpost()
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+      return 0
+
+    if event.message.text == "警報":
+      url = 'https://alerts.ncdr.nat.gov.tw/JSONAtomFeeds.ashx'
+      data = read_json(url)['entry']
+      content = show_alert(data)
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
 
