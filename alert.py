@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from datetime import datetime 
 import json
 import urllib.request as ur
 
@@ -9,7 +10,7 @@ def read_json(url):
   return data
 
 def show_alert(data):
-  string = '[警特報]\n'
+  string = '[北北桃竹地區 警特報'+ datetime.now().strftime("%Y/%m/%d %H:%M:%S") +']\n'
   authorlist = ['中央氣象局']
   keywordlist=['桃園市','台北市','新北市','新竹市','新竹縣']
   count = 1
