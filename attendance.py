@@ -13,6 +13,10 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 # The ID and range of a sample spreadsheet.
 spreadsheet_id = '1px-zh5iohWT6rNBZFNn4r_MYzmGu3St07FisKGHP6ts'
+
+#測試用
+#spreadsheet_id = '1Rg-n63tz5jE0Y26hXuROfzF9V2nNVPi_B1vFJvaDhCw'
+
 range_name = 'A:B'
 
 spreadsheet='https://docs.google.com/spreadsheets/d/%s/' % (spreadsheet_id)
@@ -51,9 +55,15 @@ def show():
     values = result.get('values', [])
     strings=''
     if not values:
-        print('No data found.')
+      print('No data found.')
     else:
-        for row in values:
+      for row in values:
+        if row[1] == '暫停':
+          strings = strings + '%s 喜樂家庭團契聚會 暫停一次' % (row[0]) + '\n'
+          strings = strings + '\n'
+          strings = strings + '新增-> 建立聚會,2019/MM/DD,AM10:00,教會一樓會議室,分享主題,講員,詩歌,幼兒照顧' + '\n'
+          return strings
+        else:  
           strings = strings + '%s 喜樂家庭團契聚會' % (row[0]) + '\n'
           strings = strings + '🕙時間：%s ' % (row[1]) + '\n'
           strings = strings + '💒地點：%s ' % (row[2]) + '\n'
@@ -85,9 +95,10 @@ def show():
     strings = strings + '\n'
     strings = strings + '\n'
     strings = strings + '功能範例：' + '\n'
-    strings = strings + '新增-> 建立聚會,2019/05/18,AM10:00,教會一樓會議室,分享主題,講員,詩歌,幼兒照顧' + '\n'
-    strings = strings + '查詢-> 聚會' + '\n'
-    strings = strings + '填寫-> 聚會,登舜家,出席/請假' +'\n'
+    strings = strings + '新增聚會-> 建立聚會,2019/MM/DD,AM10:00,教會一樓會議室,分享主題,講員,詩歌,幼兒照顧' + '\n'
+    strings = strings + '暫停聚會-> 建立聚會,2019/MM/DD,暫停' + '\n'
+    strings = strings + '查詢聚會-> 聚會' + '\n'
+    strings = strings + '填寫出席-> 聚會,保羅,出席/請假' +'\n'
     strings = strings + '\n'
 
     return strings
@@ -99,15 +110,27 @@ def index_2d(myList, v):
 
 def create(text):
     textlist=text.strip().split(',')
-    if len(textlist) != 7:
-      return '主席好！請依照以下方式建立聚會喔:)\n建立聚會,2019/05/18,AM10:00,教會一樓會議室,分享主題,講員,詩歌,幼兒照顧'
-    date = textlist[1]
-    time = textlist[2]
-    position = textlist[3]
-    subject = textlist[4]
-    speaker = textlist[5]
-    worship = textlist[6]
-    _values = [[date,time,position,subject,speaker,worship]]
+    if len(textlist) != 8 and (len(textlist) != 3 or textlist[2] != '暫停'):
+      return '主席好！請依照以下方式建立聚會喔:)\n新增聚會：建立聚會,2019/MM/DD,AM10:00,教會一樓會議室,分享主題,講員,詩歌,幼兒照顧\n暫停聚會：建立聚會,2019/MM/DD,暫停'
+
+    if len(textlist) == 8:
+      date = textlist[1]
+      time = textlist[2]
+      position = textlist[3]
+      subject = textlist[4]
+      speaker = textlist[5]
+      worship = textlist[6]
+      babysitter = textlist[7]
+    elif len(textlist) == 3:
+      date = textlist[1]
+      time = textlist[2]
+      position = textlist[2]
+      subject = textlist[2]
+      speaker = textlist[2]
+      worship = textlist[2]
+      babysitter = textlist[2]
+
+    _values = [[date,time,position,subject,speaker,worship,babysitter]]
  
     # create service for google spreadsheet
     service = build_service()
@@ -138,7 +161,7 @@ def write(text):
     if onoroff[0:2] == '出席' or onoroff[0:2] == '請假':
       _values = [[name,onoroff]]
     else:
-      return '親愛的%s，請輸入"出席"或"請假（原因）"，謝謝您！' % (name)
+      return '%s您好，請輸入"出席"或"請假（原因）"，謝謝您！' % (name)
 
     # create service for google spreadsheet
     service = build_service()
@@ -150,7 +173,12 @@ def write(text):
     range_name='A:B'
     result = ss.get_values(spreadsheet_id,range_name) 
     values = result.get('values', [])
- 
+
+    for row in values:
+      if row[1] == '暫停':
+        strings = '%s您好，%s 喜樂家庭團契聚會 暫停一次' % (name,row[0]) + '\n'
+        return strings
+    
     # check name is exist or not?
     index = index_2d(values,name)
 
@@ -167,7 +195,7 @@ def write(text):
 
 if __name__ == '__main__':
 
-#  print(create('建立聚會,2019/05/11,AM 10:00,教會一樓會議室,婚姻輔導課程分享與實作,嘉玲,逸農'))
-  print(create('建立聚會,婚姻輔導課程分享與實作,嘉玲,逸農'))
+#  print(create('建立聚會,2019/05/11,AM 10:00,教會一樓會議室,婚姻輔導課程分享與實作,嘉玲,逸農,登舜'))
+#  print(create('建立聚會,2019/05/25,暫停'))
 #  print(show())
-#   print(write('聚會,天才家,請假'))
+   print(write('聚會,天才家,請假(肚子痛)'))
