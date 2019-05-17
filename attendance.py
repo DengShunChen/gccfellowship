@@ -133,9 +133,9 @@ def write(text):
     onoroff = textlist[2]
 
     #check values
-    if onoroff[0:2] == '出席' or onoroff[0:2] == '請假'
+    if onoroff[0:2] == '出席' or onoroff[0:2] == '請假':
       _values = [[name,onoroff]]
-    else
+    else:
       return 'unknown values'
 
     # create service for google spreadsheet
