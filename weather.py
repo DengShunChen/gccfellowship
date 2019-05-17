@@ -17,6 +17,14 @@ def temp():
 def satellite(parea = '東亞',pchan = '色調強化'): 
   area = {'全景':['FDK','2750'],'東亞':['LCC','2750'], '台灣':['TWI','800']}
   chan = {'可見光':'VIS_Gray','彩色':'IR1_CR','色調強化':'IR1_MB','黑白':'IR1_Gray','真實色':'VIS_TRGB'}   
+
+  if parea == '台灣' and pchan == '可見光':
+    size = 1350
+  elif parea == '台灣' and pchan == '真實色':
+    size = '1375'
+  else:
+    size = area[parea][1]
+
   filename = '%s_%s_%s' % (area[parea][0],chan[pchan],area[parea][1])
   url = 'https://www.cwb.gov.tw/Data/satellite/%s/%s.jpg' % (filename,filename)
   print(url)
