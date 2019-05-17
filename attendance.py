@@ -136,7 +136,7 @@ def write(text):
     if onoroff[0:2] == '出席' or onoroff[0:2] == '請假':
       _values = [[name,onoroff]]
     else:
-      return '親愛的弟兄姐妹，請輸入"出席"或"請假（原因）"，謝謝您！'
+      return '親愛的%s，請輸入"出席"或"請假（原因）"，謝謝您！' % (name)
 
     # create service for google spreadsheet
     service = build_service()
