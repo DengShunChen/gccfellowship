@@ -154,9 +154,11 @@ def create(text):
 def write(text):
     # input text
     textlist=text.strip().split(',')
+    if len(textlist) != 3:
+      return 'Hi 你好，想輸入聚會出席與否嗎？請依照以下格式輸入唷...\n聚會,姓名,出席/請假（原因） \n 註：原因可不填'      
+
     name = textlist[1]
     onoroff = textlist[2]
-
     #check values
     if onoroff[0:2] == '出席' or onoroff[0:2] == '請假':
       _values = [[name,onoroff]]
