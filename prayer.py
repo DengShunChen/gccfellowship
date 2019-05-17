@@ -81,7 +81,7 @@ def show_results(values,spreadsheet,date=''):
 
     strings = strings + '\n'
     strings = strings + '如需新增/更新代禱事項，請依照以下格式輸入：' + '\n'
-    strings = strings + '輸入代禱,姓名,代禱事項' + '\n'
+    strings = strings + '代禱,姓名,代禱事項' + '\n'
     return strings
 
 def readprayer():
@@ -109,8 +109,12 @@ def index_2d(myList, v):
 def writeprayer(text):
     # input text
     textlist=text.strip().split(',')
+
+    if len(textlist) != 3:
+      return 'Hi 你好，請依照以下格式輸入代禱事項：\n代禱,姓名,代禱事項'
     name = textlist[1]
     prayer = textlist[2]
+
     _values = [[name,prayer]]
 
     # create service for google spreadsheet
@@ -144,5 +148,5 @@ def writeprayer(text):
     return strings
 
 if __name__ == '__main__':
-#  print(writeprayer('輸入代禱,測試,測試代禱事項'))
-  print(readprayer())
+  print(writeprayer('輸入代禱,測試'))
+#  print(readprayer())
