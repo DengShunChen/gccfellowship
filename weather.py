@@ -19,6 +19,7 @@ def satellite(parea = '東亞',pchan = '色調強化'):
   chan = {'可見光':'VIS_Gray','彩色':'IR1_CR','色調強化':'IR1_MB','黑白':'IR1_Gray','真實色':'VIS_TRGB'}   
   filename = '%s_%s_%s' % (area[parea][0],chan[pchan],area[parea][1])
   url = 'https://www.cwb.gov.tw/Data/satellite/%s/%s.jpg' % (filename,filename)
+  print(url)
 
   tb.download_image(url,'./satellite.jpg')
   url = tb.upload_photo('./satellite.jpg')
