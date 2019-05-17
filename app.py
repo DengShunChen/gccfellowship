@@ -20,10 +20,9 @@ from attendance import write as attend_write
 from create_card import CreateCard as commitment
 from create_card import show as show_temp
 from create_goldenverse import CreateCard as goldenverse
-from tools import Toolbox
+from weather import *
 
 app = Flask(__name__)
-tb = Toolbox
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -55,10 +54,7 @@ def handle_message(event):
     #message = TextSendMessage(text=event.message.text)
     if event.message.text == "雷達":
       
-      url = 'https://www.cwb.gov.tw/Data/radar/CV1_TW_1000.png'
-      tb.download_image(url,'./radar.png')
-      url = tb.upload_photo('./radar.png')
-
+      url = radar()
       message = ImageSendMessage(
         original_content_url=url,
         preview_image_url=url
@@ -68,10 +64,7 @@ def handle_message(event):
 
     if event.message.text == "氣溫":
 
-      url = 'https://www.cwb.gov.tw/Data/temperature/temp.jpg'
-      tb.download_image(url,'./temp.jpg')
-      url = tb.upload_photo('./temp.jpg')
-
+      url = temp()
       message = ImageSendMessage(
         original_content_url=url,
         preview_image_url=url
