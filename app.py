@@ -80,8 +80,12 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token, message)
       return 0
 
-    if event.message.text == "衛星雲圖":
-      url = satellite()
+    if event.message.text.strip().split(',')[0] == "衛星雲圖":
+      if len(event.message.text.strip().split(',')) == 1:
+        url = satellite()
+      else:
+        args = event.message.text.strip().split(',')
+        url = satellite(args[1],args[2])        
       message = ImageSendMessage(
         original_content_url=url,
         preview_image_url=url
