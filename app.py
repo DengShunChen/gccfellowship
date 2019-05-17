@@ -70,6 +70,15 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token, message)
       return 0
 
+    if event.message.text == "雨量":
+      url = rain()
+      message = ImageSendMessage(
+        original_content_url=url,
+        preview_image_url=url
+      )
+      line_bot_api.reply_message(event.reply_token, message)
+      return 0
+
     if event.message.text == "衛星雲圖":
       url = satellite()
       message = ImageSendMessage(
