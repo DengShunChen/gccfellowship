@@ -7,7 +7,7 @@ class Toolbox():
     print('Using Toolbox')
 
   def download_image(self,image_url,image_name):
-    urllib.request.urlretrieve(image_url,image_name) 
+    ur.urlretrieve(image_url,image_name) 
 
   def download_image(self,image_url,image_name):
     print("Downloading image... ")
