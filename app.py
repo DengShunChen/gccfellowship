@@ -20,7 +20,6 @@ from attendance import write as attend_write
 from create_card import CreateCard as commitment
 from create_card import show as show_temp
 from create_goldenverse import CreateCard as goldenverse
-from create_goldenverse import upload_photo
 from tools import Toolbox
 
 app = Flask(__name__)
