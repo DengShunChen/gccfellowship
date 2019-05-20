@@ -1,39 +1,28 @@
 from datetime import datetime, timedelta
 from flask import Flask, request, abort
 import random
-import configparser
-
-from linebot import (
-    LineBotApi, WebhookHandler
-)
+from line_bot_api import get_api
 from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-from cwb_data import *
+from reaction import MessageReact 
+#from cwb_data import *
 #from google_search import *
-from prayer import *
-from dailybread import get_post as dbpost
-from cct import get_post as cctpost
-from attendance import create as attend_create
-from attendance import show as attend_show
-from attendance import write as attend_write
-from create_card import CreateCard as commitment
-from create_card import show as show_temp
-from create_goldenverse import CreateCard as goldenverse
-from weather import *
-from alert import show_alert, read_json
+#from prayer import *
+#from dailybread import get_post as dbpost
+#from cct import get_post as cctpost
+#from attendance import create as attend_create
+#from attendance import show as attend_show
+#from attendance import write as attend_write
+#from create_card import CreateCard as commitment
+#from create_card import show as show_temp
+#from create_goldenverse import CreateCard as goldenverse
+#from weather import *
+#from alert import show_alert, read_json
 
 app = Flask(__name__)
-
-config = configparser.ConfigParser()
-config.read("config.ini")
-
-# Channel Access Token
-line_bot_api = LineBotApi(config['line_bot']['Channel_Access_Token'])
-# Channel Secret
-handler = WebhookHandler(config['line_bot']['Channel_Secret'])
-
+line_bot_api, handler = get_api()
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -53,241 +42,25 @@ def callback():
 # 處理文字訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    #message = TextSendMessage(text=event.message.text)
-    if event.message.text == "雷達":
-      url = radar()
-      message = ImageSendMessage(
-        original_content_url=url,
-        preview_image_url=url
-      )
-      line_bot_api.reply_message(event.reply_token, message)
-      return 0
 
-    if event.message.text == "氣溫":
-      url = temp()
-      message = ImageSendMessage(
-        original_content_url=url,
-        preview_image_url=url
-      )
-      line_bot_api.reply_message(event.reply_token, message)
-      return 0
+  # using class
+  MR = MessageReact(event)
 
-    if event.message.text == "雨量":
-      url = rain()
-      message = ImageSendMessage(
-        original_content_url=url,
-        preview_image_url=url
-      )
-      line_bot_api.reply_message(event.reply_token, message)
-      return 0
+  # input message
+  text = event.message.text
 
-    if event.message.text.strip().split(',')[0] == "衛星雲圖":
-      if len(event.message.text.strip().split(',')) == 1:
-        url = satellite()
-      else:
-        args = event.message.text.strip().split(',')
-        url = satellite(args[1],args[2])        
-      message = ImageSendMessage(
-        original_content_url=url,
-        preview_image_url=url
-      )
-      line_bot_api.reply_message(event.reply_token, message)
-      return 0
+  # text message reaction 
+  MR.react(text)
 
-    if event.message.text == "平鎮天氣":
-      dataid="F-D0047-007"
-      dataformat='JSON'
-      # get cwb open data
-      data = cwb_open_data(dataid,dataformat)
-      # read json file
-      data.read_json()
-      # get weather information
-      location='平鎮區'
-      data.get_info(location)
-      content = data.write_info(data.WeatherDescription)
+  # 
+  if text.strip().split(',')[0] == "小幫手推播":
+    message_react(text.strip().split(',')[1])
 
-      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-      return 0
-
-    if event.message.text == "天氣小幫手":
-      # get data
-      url = 'https://opendata.cwb.gov.tw/fileapi/opendata/MFC/F-C0032-031.FW50'
-      resource = ur.urlopen(url)
-      content = resource.read().decode('big5')
-
-      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-      return 0
-
-    if event.message.text.strip().split(',')[0] == "代禱":
-      if len(event.message.text.strip().split(',')) == 1:
-        content = readprayer()
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-        return 0
-      else:
-        content = writeprayer(event.message.text)
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-        return 0
-
-    if event.message.text.strip().split(',')[0] == "輸入代禱":
-      content = writeprayer(event.message.text)
-      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-      return 0
-
-    if event.message.text == "靈命日糧":
-      content = dbpost()
-      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-      return 0
-
-    if event.message.text == "警報":
-      url = 'https://alerts.ncdr.nat.gov.tw/JSONAtomFeeds.ashx'
-      data = read_json(url)['entry']
-      content = show_alert(data)
-      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-      return 0
-
-    if event.message.text == "論壇報新聞":
-      content = cctpost()
-      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-      return 0
-
-    if event.message.text == "團契成員檔案":
-      profile = line_bot_api.get_group_member_profile(group_id, user_id)
-
-      content = ''
-      content = content + profile.display_name + '/n'
-      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-      return 0
- 
-    if event.message.text.strip().split(',')[0] == "立約小卡":
-
-      if len(event.message.text.strip().split(',')) == 1:
-        content = show_temp()
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-        return 0
-      else:
-        url = commitment(event.message.text)
-        message = ImageSendMessage(
-          original_content_url=url,
-          preview_image_url=url
-        )
-        line_bot_api.reply_message(event.reply_token, message)
-        return 0
- 
-    if event.message.text == "金句":
-      url = goldenverse()
-      message = ImageSendMessage(
-        original_content_url=url,
-        preview_image_url=url
-      )
-      line_bot_api.reply_message(event.reply_token, message)
-      return 0
- 
-    if event.message.text == "讚美主":
-      url = goldenverse('讚美')
-      message = ImageSendMessage(
-        original_content_url=url,
-        preview_image_url=url
-      )
-      line_bot_api.reply_message(event.reply_token, message)
-      return 0
- 
-    if event.message.text == "求安慰":
-      url = goldenverse('安慰')
-      message = ImageSendMessage(
-        original_content_url=url,
-        preview_image_url=url
-      )
-      line_bot_api.reply_message(event.reply_token, message)
-      return 0
- 
-    if event.message.text == "求醫治":
-      url = goldenverse('醫治')
-      message = ImageSendMessage(
-        original_content_url=url,
-        preview_image_url=url
-      )
-      line_bot_api.reply_message(event.reply_token, message)
-      return 0
-   
-    if event.message.text.strip().split(',')[0] == "聚會":
-      if len(event.message.text.strip().split(',')) == 1:
-        content = attend_show()
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-        return 0
-      else:
-        content = attend_write(event.message.text)
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-        return 0  
-
-    if event.message.text.strip().split(',')[0] == "輸入聚會":
-      content = attend_write(event.message.text)
-      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-      return 0
-
-    if event.message.text.strip().split(',')[0] == "顯示聚會":
-      content = attend_show()
-      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-      return 0
-
-    if event.message.text.strip().split(',')[0] == "建立聚會":
-      content = attend_create(event.message.text)
-      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-      return 0
-
-    if event.message.text.strip().split(',')[0] == "廣播":
-      line_bot_api.push_message(
-            'C8911cda987a6c04e8748e0dc8c869df0',
-            TextMessage(text=event.message.text.strip().split(',')[1])
-        )
-
-    if event.message.text == "天氣":
-      carousel_template_message = TemplateSendMessage(
-          alt_text='目錄 contains',
-          template=CarouselTemplate(
-              columns=[
-                  CarouselColumn(
-                      thumbnail_image_url='https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/810/f/weather.jpg',
-                      title='現在天氣',
-                      text='請選擇',
-                      actions=[
-                          MessageAction(
-                              label='雷達',
-                              text='雷達'
-                          ),
-                          MessageAction(
-                              label='氣溫',
-                              text='氣溫'
-                          ),
-                          URIAction(
-                              label='氣象局官網',
-                              uri='https://www.cwb.gov.tw/V8/C/index.html'
-                          )
-                      ]
-                  ),
-                  CarouselColumn(
-                      thumbnail_image_url='https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/810/f/weather.jpg',
-                      title='空氣品質',
-                      text='請選擇',
-                      actions=[
-                          URIAction(
-                              label='平鎮區空氣品質',
-                              uri='http://aqicn.org/city/taiwan/pingzhen/hk/'
-                          ),
-                          URIAction(
-                              label='中壢區空氣品質',
-                              uri='http://aqicn.org/city/taiwan/jhongli/hk/'
-                          ),
-                          URIAction(
-                              label='台灣空氣品質',
-                              uri='https://airtw.epa.gov.tw/'
-                          )
-                      ]
-                  )
-              ]
-          )
+    line_bot_api.push_message(
+          'C8911cda987a6c04e8748e0dc8c869df0',
+           TextMessage(text=text.strip().split(',')[1])
       )
 
-      line_bot_api.reply_message(event.reply_token, carousel_template_message)
 
 @handler.add(JoinEvent)
 def handle_join(event):
