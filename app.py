@@ -284,11 +284,15 @@ def handle_message(event):
 
 @handler.add(JoinEvent)
 def handle_join(event):
-    newcoming_text = "謝謝邀請小幫手來至此群組！！我會盡力為大家服務的～"
+    newcoming_text = "謝謝邀請小幫手來至此群組！！我會盡力為大家服務～"
 
     line_bot_api.reply_message(
             event.reply_token,
             TextMessage(text=newcoming_text)
+        )
+    line_bot_api.push_message(
+            'Uee94d5ab36b7b6e02a774098d6d735ae',
+            TextMessage(text='Hi 有群組加入小幫手了唷！')
         )
     print("JoinEvent =", JoinEvent)
 
@@ -296,6 +300,10 @@ def handle_join(event):
 def handle_leave(event):
     print("leave Event =", event)
     print("我被踢掉了QQ 相關資訊", event.source)
+    line_bot_api.push_message(
+            'Uee94d5ab36b7b6e02a774098d6d735ae',
+            TextMessage(text='Hi 有群組離開小幫手了唷！')
+        )
 
 #    content = search(event.message.text)
 #    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
