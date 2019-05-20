@@ -1,3 +1,4 @@
+from linebot.models import *
 from line_bot_api import get_api
 from cwb_data import *
 #from google_search import *
