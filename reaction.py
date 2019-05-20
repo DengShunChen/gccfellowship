@@ -30,11 +30,17 @@ class MessageReact():
       print('Unknown send type !')
 
   def react(self,text):
-    if text.strip().split(',')[0] == "廣播":
-      self.send = 'push'      
-      self.react(text.strip().split(',')[1])
+    if text.strip().split(',')[0] == "小幫手廣播":
+      textlist = text.strip().split(',')
+      words = ','.join(textlist[1:])
 
-    if text == "雷達":
+      self.send = 'push'
+      exitcode = self.react(words)
+      if exitcode != 0:
+        message = TextSendMessage(text=words.strip().split(',')[0])
+        self.send_to(message=message)
+
+    elif text == "雷達":
       url = radar()
       message = ImageSendMessage(
         original_content_url=url,
@@ -43,7 +49,7 @@ class MessageReact():
       self.send_to(message=message)
       return 0
 
-    if text == "氣溫":
+    elif text == "氣溫":
       url = temp()
       message = ImageSendMessage(
         original_content_url=url,
@@ -52,7 +58,7 @@ class MessageReact():
       self.send_to(message=message)
       return 0
 
-    if text == "雨量":
+    elif text == "雨量":
       url = rain()
       message = ImageSendMessage(
         original_content_url=url,
@@ -61,7 +67,7 @@ class MessageReact():
       self.send_to(message=message)
       return 0
 
-    if text.strip().split(',')[0] == "衛星雲圖":
+    elif text.strip().split(',')[0] == "衛星雲圖":
       if len(text.strip().split(',')) == 1:
         url = satellite()
       else:
@@ -74,7 +80,7 @@ class MessageReact():
       self.send_to(message=message)
       return 0
 
-    if text == "平鎮天氣":
+    elif text == "平鎮天氣":
       dataid="F-D0047-007"
       dataformat='JSON'
       # get cwb open data
@@ -91,7 +97,7 @@ class MessageReact():
 
       return 0
 
-    if text == "天氣小幫手":
+    elif text == "天氣小幫手":
       # get data
       url = 'https://opendata.cwb.gov.tw/fileapi/opendata/MFC/F-C0032-031.FW50'
       resource = ur.urlopen(url)
@@ -101,7 +107,7 @@ class MessageReact():
       self.send_to(message=message)
       return 0
 
-    if text.strip().split(',')[0] == "代禱":
+    elif text.strip().split(',')[0] == "代禱":
       if len(text.strip().split(',')) == 1:
         content = readprayer()
         message = TextSendMessage(text=content)
@@ -113,19 +119,19 @@ class MessageReact():
         self.send_to(message=message)
         return 0
 
-    if text.strip().split(',')[0] == "輸入代禱":
+    elif text.strip().split(',')[0] == "輸入代禱":
       content = writeprayer(text)
       message = TextSendMessage(text=content)
       self.send_to(message=message)
       return 0
 
-    if text == "靈命日糧":
+    elif text == "靈命日糧":
       content = dbpost()
       message = TextSendMessage(text=content)
       self.send_to(message=message)
       return 0
 
-    if text == "警報":
+    elif text == "警報":
       url = 'https://alerts.ncdr.nat.gov.tw/JSONAtomFeeds.ashx'
       data = read_json(url)['entry']
       content = show_alert(data)
@@ -133,22 +139,21 @@ class MessageReact():
       self.send_to(message=message)
       return 0
 
-    if text == "論壇報新聞":
+    elif text == "論壇報新聞":
       content = cctpost()
       message = TextSendMessage(text=content)
       self.send_to(message=message)
       return 0
 
-    if text == "團契成員檔案":
+    elif text == "團契成員檔案":
       profile = self.line_bot_api.get_group_member_profile('C8911cda987a6c04e8748e0dc8c869df0', 'Uee94d5ab36b7b6e02a774098d6d735ae')
 
-      content = ''
-      content = content + profile.display_name + '/n'
+      content = profile.display_name 
       message = TextSendMessage(text=content)
       self.send_to(message=message)
       return 0
  
-    if text.strip().split(',')[0] == "立約小卡":
+    elif text.strip().split(',')[0] == "立約小卡":
 
       if len(text.strip().split(',')) == 1:
         content = show_temp()
@@ -164,7 +169,7 @@ class MessageReact():
         self.send_to(message=message)
         return 0
  
-    if text == "金句":
+    elif text == "金句":
       url = goldenverse()
       message = ImageSendMessage(
         original_content_url=url,
@@ -173,7 +178,7 @@ class MessageReact():
       self.send_to(message=message)
       return 0
  
-    if text == "讚美主":
+    elif text == "讚美主":
       url = goldenverse('讚美')
       message = ImageSendMessage(
         original_content_url=url,
@@ -182,7 +187,7 @@ class MessageReact():
       self.send_to(message=message)
       return 0
  
-    if text == "求安慰":
+    elif text == "求安慰":
       url = goldenverse('安慰')
       message = ImageSendMessage(
         original_content_url=url,
@@ -191,7 +196,7 @@ class MessageReact():
       self.send_to(message=message)
       return 0
  
-    if text == "求醫治":
+    elif text == "求醫治":
       url = goldenverse('醫治')
       message = ImageSendMessage(
         original_content_url=url,
@@ -200,7 +205,7 @@ class MessageReact():
       self.send_to(message=message)
       return 0
    
-    if text.strip().split(',')[0] == "聚會":
+    elif text.strip().split(',')[0] == "聚會":
       if len(text.strip().split(',')) == 1:
         content = attend_show()
         message = TextSendMessage(text=content)
@@ -212,25 +217,25 @@ class MessageReact():
         self.send_to(message=message)
         return 0  
 
-    if text.strip().split(',')[0] == "輸入聚會":
+    elif text.strip().split(',')[0] == "輸入聚會":
       content = attend_write(text)
       message = TextSendMessage(text=content)
       self.send_to(message=message)
       return 0
 
-    if text.strip().split(',')[0] == "顯示聚會":
+    elif text.strip().split(',')[0] == "顯示聚會":
       content = attend_show()
       message = TextSendMessage(text=content)
       self.send_to(message=message)
       return 0
 
-    if text.strip().split(',')[0] == "建立聚會":
+    elif text.strip().split(',')[0] == "建立聚會":
       content = attend_create(text)
       message = TextSendMessage(text=content)
       self.send_to(message=message)
       return 0
 
-    if text == "天氣":
+    elif text == "天氣":
       carousel_template_message = TemplateSendMessage(
           alt_text='目錄 contains',
           template=CarouselTemplate(
@@ -278,5 +283,7 @@ class MessageReact():
       )
 
       self.send_to(message=carousel_template_message)
+    else:
+      return -1
 
 
