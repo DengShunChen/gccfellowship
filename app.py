@@ -294,7 +294,8 @@ def handle_join(event):
             'Uee94d5ab36b7b6e02a774098d6d735ae',
             TextMessage(text='Hi 有群組加入小幫手了唷！')
         )
-    print("JoinEvent =", JoinEvent)
+    print("JoinEvent =", event)
+    print("加入的相關資訊 =", event.source)
 
 @handler.add(LeaveEvent)
 def handle_leave(event):
