@@ -146,7 +146,21 @@ class MessageReact():
       return 0
 
     elif text == "團契成員檔案":
-      profile = self.line_bot_api.get_group_member_profile('C8911cda987a6c04e8748e0dc8c869df0', 'Uee94d5ab36b7b6e02a774098d6d735ae')
+      groupID='C8911cda987a6c04e8748e0dc8c869df0'
+      userID = 'Uee94d5ab36b7b6e02a774098d6d735ae'
+      member_ids_res = self.line_bot_api.get_group_member_ids(groupID)
+
+      print(member_ids_res.member_ids)
+      print(member_ids_res.next)
+      content = member_ids_res.member_ids
+      message = TextSendMessage(text=content)
+      self.send_to(message=message)
+      return 0 
+
+    elif text == "測試身份":
+      groupID='C8911cda987a6c04e8748e0dc8c869df0'
+      userID = 'Uee94d5ab36b7b6e02a774098d6d735ae'
+      profile = self.line_bot_api.get_group_member_profile(groupID, userID)
 
       content = profile.display_name 
       message = TextSendMessage(text=content)
