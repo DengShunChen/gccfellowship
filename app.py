@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from flask import Flask, request, abort
 import random
 import configparser
@@ -233,6 +234,12 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
 
+    if event.message.text.strip().split(',')[0] == "廣播":
+      line_bot_api.push_message(
+            'C8911cda987a6c04e8748e0dc8c869df0',
+            TextMessage(text=event.message.text.strip().split(',')[1])
+        )
+
     if event.message.text == "天氣":
       carousel_template_message = TemplateSendMessage(
           alt_text='目錄 contains',
@@ -305,6 +312,8 @@ def handle_leave(event):
             'Uee94d5ab36b7b6e02a774098d6d735ae',
             TextMessage(text='Hi 有群組離開小幫手了唷！')
         )
+
+
 
 #    content = search(event.message.text)
 #    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
