@@ -138,14 +138,26 @@ def create(text):
     # using SpreadsheetSnippets class
     ss = SpreadsheetSnippets(service)
 
+    # check out exist date
+    range_name='A2:A2'
+    result = ss.get_values(spreadsheet_id,range_name) 
+    values = result.get('values', [])
+    for row in values:
+      print(row[0],date)
+      if row[0] == date:
+        clean = False
+      else:
+        clean = True
+ 
     # write values
     range_name='A2:G2'
     result = ss.update_values(spreadsheet_id,range_name,'USER_ENTERED',_values) 
 
-    # clear attendance 
-    range_name = 'A4:B20'
-    request = service.spreadsheets().values().clear(spreadsheetId=spreadsheet_id, range=range_name)
-    response = request.execute()
+    # clear attendance
+    if clean: 
+      range_name = 'A4:B20'
+      request = service.spreadsheets().values().clear(spreadsheetId=spreadsheet_id, range=range_name)
+      response = request.execute()
 
     strings = show()
 
@@ -197,7 +209,7 @@ def write(text):
 
 if __name__ == '__main__':
 
-#  print(create('建立聚會,2019/05/11,AM 10:00,教會一樓會議室,婚姻輔導課程分享與實作,嘉玲,逸農,登舜'))
+  print(create('建立聚會,2019/05/18,AM 10:00,教會一樓會議室,婚姻輔導課程分享與實作,嘉玲,逸農,天才'))
 #  print(create('建立聚會,2019/05/25,暫停'))
 #  print(show())
-   print(write('聚會,天才家,請假(肚子痛)'))
+#  print(write('聚會,天才家,出席'))
