@@ -20,6 +20,11 @@ def CreateCard(propose='金句'):
   with open('goldenverse.json', 'r') as f :
     verses = json.load(f)
 
+  if propose == '金句':
+    proposelist = ['金句','讚美','安慰','醫治']
+    _id = random.randint(0,len(proposelist)-1)
+    propose = proposelist[_id]
+
   # 使用金句 
   verses = verses[propose]
 

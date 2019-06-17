@@ -1,6 +1,6 @@
 #!/bin/bash
 
 git add .
-git commit -am "make it better"
+git commit -am "randon select for golden verse"
 git push heroku master
 heroku logs --tail
