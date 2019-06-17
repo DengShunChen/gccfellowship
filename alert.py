@@ -16,6 +16,7 @@ def show_alert(data):
   keywordlist=['桃園市','台北市','新北市','新竹市','新竹縣']
   count = 1
   for message in data:
+    print('message :',message)
     author = message['author']['name']
     summary = message['summary']['#text'].strip()
 
@@ -46,5 +47,5 @@ def show_all(data):
 if __name__ == '__main__':
   url = 'https://alerts.ncdr.nat.gov.tw/JSONAtomFeeds.ashx'
   data = read_json(url)['entry']
-  print(show_alert(data))
-#  print(show_all(data))
+#  print(show_alert(data))
+  print(show_all(data))
