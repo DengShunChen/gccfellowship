@@ -96,6 +96,7 @@ def handle_postback(event):
 # 處理音訊訊息
 from pydub import AudioSegment
 import speech_recognition as sr
+import tempfile
 @handler.add(MessageEvent,message=AudioMessage)
 def handle_aud(event):
     r = sr.Recognizer()
