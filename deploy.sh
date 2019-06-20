@@ -1,6 +1,6 @@
 #!/bin/bash
  
-message='fix if only have single message of alert '
+message='make it better '
 
 git add .
 git commit -am "$message"

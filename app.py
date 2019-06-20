@@ -98,28 +98,29 @@ from pydub import AudioSegment
 import speech_recognition as sr
 @handler.add(MessageEvent,message=AudioMessage)
 def handle_aud(event):
-    r = sr.Recognizer()
-    message_content = line_bot_api.get_message_content(event.message.id)
-    ext = 'mp3'
-    try:
-        with tempfile.NamedTemporaryFile(prefix=ext + '-', delete=False) as tf:
-            for chunk in message_content.iter_content():
-                tf.write(chunk)
-            tempfile_path = tf.name
-        path = tempfile_path
-        AudioSegment.converter = '/app/vendor/ffmpeg/ffmpeg'
-        sound = AudioSegment.from_file_using_temporary_files(path)
-        path = os.path.splitext(path)[0]+'.wav'
-        sound.export(path, format="wav")
-        with sr.AudioFile(path) as source:
-            audio = r.record(source)
-    except Exception as e:
-        t = '音訊有問題'+test+str(e.args)+path
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=t))
-    os.remove(path)
-    text = r.recognize_google(audio,language='zh-TW')
-    message = audio_template(text)
-    line_bot_api.reply_message(event.reply_token,message)
+  print(event)
+#   r = sr.Recognizer()
+#   message_content = line_bot_api.get_message_content(event.message.id)
+#   ext = 'mp3'
+#   try:
+#       with tempfile.NamedTemporaryFile(prefix=ext + '-', delete=False) as tf:
+#           for chunk in message_content.iter_content():
+#               tf.write(chunk)
+#           tempfile_path = tf.name
+#       path = tempfile_path
+#       AudioSegment.converter = '/app/vendor/ffmpeg/ffmpeg'
+#       sound = AudioSegment.from_file_using_temporary_files(path)
+#       path = os.path.splitext(path)[0]+'.wav'
+#       sound.export(path, format="wav")
+#       with sr.AudioFile(path) as source:
+#           audio = r.record(source)
+#   except Exception as e:
+#       t = '音訊有問題'+test+str(e.args)+path
+#       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=t))
+#   os.remove(path)
+#   text = r.recognize_google(audio,language='zh-TW')
+#   message = audio_template(text)
+#   line_bot_api.reply_message(event.reply_token,message)
 
 import os
 if __name__ == "__main__":
