@@ -42,8 +42,8 @@ class MessageReact():
         self.send_to(message=message)
 
     elif text == 'quota':
-        quota = line_bot_api.get_message_quota()
-        line_bot_api.reply_message(
+        quota = self.line_bot_api.get_message_quota()
+        self.line_bot_api.reply_message(
             event.reply_token, [
                 TextSendMessage(text='type: ' + quota.type),
                 TextSendMessage(text='value: ' + str(quota.value))
@@ -52,15 +52,15 @@ class MessageReact():
 
     elif text == '小幫手再見':
         if isinstance(event.source, SourceGroup):
-            line_bot_api.reply_message(
+            self.line_bot_api.reply_message(
                 event.reply_token, TextSendMessage(text='再見！有需要再加入我喔！'))
-            line_bot_api.leave_group(event.source.group_id)
+            self.line_bot_api.leave_group(event.source.group_id)
         elif isinstance(event.source, SourceRoom):
-            line_bot_api.reply_message(
+            self.line_bot_api.reply_message(
                 event.reply_token, TextSendMessage(text='再見！有需要再加入我喔！'))
-            line_bot_api.leave_room(event.source.room_id)
+            self.line_bot_api.leave_room(event.source.room_id)
         else:
-            line_bot_api.reply_message(
+            self.line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="很抱歉！小幫手不能離開一對一聊天室喔！"))
 
