@@ -19,6 +19,8 @@ line_bot_api, handler = get_api()
 # Deng-Shun 
 userID='Uee94d5ab36b7b6e02a774098d6d735ae'
 
+Temp = Template()
+
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -122,7 +124,7 @@ def handle_aud(event):
     os.remove(path)
     text = r.recognize_google(audio,language='zh-tw')
     print(text)
-    message = Template.audio_template(text)
+    message = Temp.audio_template(text)
     line_bot_api.reply_message(event.reply_token,message)
 
 import os
