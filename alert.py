@@ -36,11 +36,17 @@ def show_alert(data):
 def show_all(data):
   string = '[警特報]\n'
   count = 1
-  for message in data:
-    author = message['author']['name']
-    summary = message['summary']['#text'].strip()
+  if type(data) is dict:
+    author = data['author']['name']
+    summary = data['summary']['#text'].strip()
     string = string + '%2d. %s: \n%s \n\n' % (count,author,summary)
-    count+=1
+  else:
+    for message in data:
+      print('message :',message)
+      author = message['author']['name']
+      summary = message['summary']['#text'].strip()
+      string = string + '%2d. %s: \n%s \n\n' % (count,author,summary)
+      count+=1
   return string
 
 
