@@ -119,7 +119,7 @@ def handle_aud(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=t))
     os.remove(path)
     text = r.recognize_google(audio,language='zh-TW')
-    message = audio_template(text)
+    message = text
     line_bot_api.reply_message(event.reply_token,message)
 
 import os
