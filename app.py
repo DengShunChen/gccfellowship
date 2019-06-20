@@ -85,6 +85,12 @@ def handle_sticker_message(event):
     )
 #   line_bot_api.reply_message(event.reply_token,sticker_message)
 
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    profile = line_bot_api.get_profile(event.source.user_id)
+    user_name = profile.display_name
+    data = event.postback.data
+
 import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
