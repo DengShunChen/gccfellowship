@@ -100,8 +100,9 @@ import speech_recognition as sr
 import os
 import tempfile
 @handler.add(MessageEvent,message=AudioMessage)
+def handle_aud(event):
 
-def audio_template(text):
+    def audio_template(text):
     Confirm_template = TemplateSendMessage(
         alt_text='audio_template',
         template=ConfirmTemplate(
@@ -121,7 +122,7 @@ def audio_template(text):
     )
     return Confirm_template
 
-def handle_aud(event):
+
     r = sr.Recognizer()
     message_content = line_bot_api.get_message_content(event.message.id)
     ext = 'mp3'
