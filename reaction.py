@@ -41,27 +41,18 @@ class MessageReact():
         message = TextSendMessage(text=words.strip().split(',')[0])
         self.send_to(message=message)
 
-    elif text == 'quota':
-        quota = self.line_bot_api.get_message_quota()
-        self.line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text='type: ' + quota.type),
-                TextSendMessage(text='value: ' + str(quota.value))
-            ]
-        )
-
     elif text == '小幫手再見':
-        if isinstance(event.source, SourceGroup):
+        if isinstance(self.event.source, SourceGroup):
             self.line_bot_api.reply_message(
-                event.reply_token, TextSendMessage(text='再見！有需要再加入我喔！'))
-            self.line_bot_api.leave_group(event.source.group_id)
-        elif isinstance(event.source, SourceRoom):
+                self.event.reply_token, TextSendMessage(text='再見！有需要再加入我喔！'))
+            self.line_bot_api.leave_group(self.event.source.group_id)
+        elif isinstance(self.event.source, SourceRoom):
             self.line_bot_api.reply_message(
-                event.reply_token, TextSendMessage(text='再見！有需要再加入我喔！'))
-            self.line_bot_api.leave_room(event.source.room_id)
+                self.event.reply_token, TextSendMessage(text='再見！有需要再加入我喔！'))
+            self.line_bot_api.leave_room(self.event.source.room_id)
         else:
             self.line_bot_api.reply_message(
-                event.reply_token,
+                self.event.reply_token,
                 TextSendMessage(text="很抱歉！小幫手不能離開一對一聊天室喔！"))
 
     elif text == "雷達":
@@ -118,7 +109,6 @@ class MessageReact():
 
       message = TextSendMessage(text=content)
       self.send_to(message=message)
-
       return 0
 
     elif text == "天氣小幫手":
@@ -192,7 +182,6 @@ class MessageReact():
       return 0
  
     elif text.strip().split(',')[0] == "立約小卡":
-
       if len(text.strip().split(',')) == 1:
         content = show_temp()
         message = TextSendMessage(text=content)
