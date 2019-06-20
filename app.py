@@ -9,6 +9,25 @@ from linebot.exceptions import (
 from linebot.models import *
 from reaction import MessageReact 
 
+def audio_template(text):
+  Confirm_template = TemplateSendMessage(
+      alt_text='audio_template',
+      template=ConfirmTemplate(
+          title='確定一下吧',
+          text='您的建議是:\n{}'.format(text),
+          actions=[
+              MessageTemplateAction(
+                  label='錯',
+                  text='那請再說一次'
+              ),
+              MessageTemplateAction(
+                  label='對',
+                  text=text
+              )
+          ]
+      )
+  )
+  return Confirm_template
 
 app = Flask(__name__)
 
@@ -101,28 +120,6 @@ import os
 import tempfile
 @handler.add(MessageEvent,message=AudioMessage)
 def handle_aud(event):
-
-    def audio_template(text):
-    Confirm_template = TemplateSendMessage(
-        alt_text='audio_template',
-        template=ConfirmTemplate(
-            title='確定一下吧',
-            text='您的建議是:\n{}'.format(text),
-            actions=[
-                MessageTemplateAction(
-                    label='錯',
-                    text='那請再說一次'
-                ),
-                MessageTemplateAction(
-                    label='對',
-                    text=text
-                )
-            ]
-        )
-    )
-    return Confirm_template
-
-
     r = sr.Recognizer()
     message_content = line_bot_api.get_message_content(event.message.id)
     ext = 'mp3'
