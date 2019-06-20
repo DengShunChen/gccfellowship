@@ -1,6 +1,6 @@
 #!/bin/bash
  
-message='make it better '
+message='add audio emplate'
 
 git add .
 git commit -am "$message"

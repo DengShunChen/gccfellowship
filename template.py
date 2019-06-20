@@ -1,5 +1,8 @@
+from linebot.models import *
 
-def audio_template(text):
+class Template(object):
+
+  def audio_template(self,text):
     Confirm_template = TemplateSendMessage(
         alt_text='audio_template',
         template=ConfirmTemplate(
