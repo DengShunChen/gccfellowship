@@ -9,6 +9,7 @@ from linebot.exceptions import (
 from linebot.models import *
 from reaction import MessageReact 
 
+
 app = Flask(__name__)
 
 # get Line bot API 
@@ -98,6 +99,27 @@ from pydub import AudioSegment
 import speech_recognition as sr
 import tempfile
 @handler.add(MessageEvent,message=AudioMessage)
+
+def audio_template(text):
+    Confirm_template = TemplateSendMessage(
+        alt_text='audio_template',
+        template=ConfirmTemplate(
+            title='確定一下吧',
+            text='您的建議是:\n{}'.format(text),
+            actions=[
+                MessageTemplateAction(
+                    label='錯',
+                    text='那請再說一次'
+                ),
+                MessageTemplateAction(
+                    label='對',
+                    text=text
+                )
+            ]
+        )
+    )
+    return Confirm_template
+
 def handle_aud(event):
     r = sr.Recognizer()
     message_content = line_bot_api.get_message_content(event.message.id)
@@ -119,7 +141,7 @@ def handle_aud(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=t))
     os.remove(path)
     text = r.recognize_google(audio,language='zh-TW')
-    message = text
+    message = audio_template(text)
     line_bot_api.reply_message(event.reply_token,message)
 
 import os
