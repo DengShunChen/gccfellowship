@@ -1,6 +1,6 @@
 #!/bin/bash
  
-message='add audio emplate'
+message=$1
 
 git add .
 git commit -am "$message"
