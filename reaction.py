@@ -14,7 +14,11 @@ from create_card import show as show_temp
 from create_goldenverse import CreateCard as goldenverse
 from weather import *
 from alert import show_alert, read_json
-
+from pydub import AudioSegment
+import speech_recognition as sr
+import os
+import tempfile
+from template import Template
 
 class MessageReact():
   def __init__(self,event):
@@ -312,5 +316,46 @@ class MessageReact():
       self.send_to(message=carousel_template_message)
     else:
       return -1
+
+class AudioReact():
+  def __init__(self,event):
+    self.event = event     
+    self.send = 'reply'
+    self.line_bot_api, self.handler  = get_api()
+    self.Temp = Template()
+
+  def send_to(self,message):   
+    if  self.send == 'reply':
+      self.line_bot_api.reply_message(self.event.reply_token, message)
+    elif self.send == 'push':
+      self.line_bot_api.push_message('C8911cda987a6c04e8748e0dc8c869df0',message)
+    else:
+      print('Unknown send type !')
+
+  def speech2text():
+    r = sr.Recognizer()
+    message_content = self.line_bot_api.get_message_content(self.event.message.id)
+    ext = 'mp3'
+    try:
+        with tempfile.NamedTemporaryFile(prefix=ext + '-', delete=False) as tf:
+            for chunk in message_content.iter_content():
+                tf.write(chunk)
+            tempfile_path = tf.name
+        path = tempfile_path
+        AudioSegment.converter = '/app/vendor/ffmpeg/ffmpeg'
+        sound = AudioSegment.from_file_using_temporary_files(path)
+        path = os.path.splitext(path)[0]+'.wav'
+        sound.export(path, format="wav")
+        with sr.AudioFile(path) as source:
+            audio = r.record(source)
+    except Exception as e:
+        t = '音訊有問題'+test+str(e.args)+path
+        message = TextSendMessage(text=t)
+        self.sent_to(message)
+    os.remove(path)
+    text = r.recognize_google(audio,language='cmn-Hant-TW')
+    print(text)
+    message = self.Temp.audio_template(text)
+    self.sent_to(message)
 
 

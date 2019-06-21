@@ -7,9 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-from reaction import MessageReact 
-from template import Template
-
+from reaction import MessageReact, AudioReact 
 
 app = Flask(__name__)
 
@@ -18,8 +16,6 @@ line_bot_api, handler = get_api()
 
 # Deng-Shun 
 userID='Uee94d5ab36b7b6e02a774098d6d735ae'
-
-Temp = Template()
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -103,29 +99,10 @@ import os
 import tempfile
 @handler.add(MessageEvent,message=AudioMessage)
 def handle_aud(event):
-    r = sr.Recognizer()
-    message_content = line_bot_api.get_message_content(event.message.id)
-    ext = 'mp3'
-    try:
-        with tempfile.NamedTemporaryFile(prefix=ext + '-', delete=False) as tf:
-            for chunk in message_content.iter_content():
-                tf.write(chunk)
-            tempfile_path = tf.name
-        path = tempfile_path
-        AudioSegment.converter = '/app/vendor/ffmpeg/ffmpeg'
-        sound = AudioSegment.from_file_using_temporary_files(path)
-        path = os.path.splitext(path)[0]+'.wav'
-        sound.export(path, format="wav")
-        with sr.AudioFile(path) as source:
-            audio = r.record(source)
-    except Exception as e:
-        t = '音訊有問題'+test+str(e.args)+path
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=t))
-    os.remove(path)
-    text = r.recognize_google(audio,language='cmn-Hant-TW')
-    print(text)
-    message = Temp.audio_template(text)
-    line_bot_api.reply_message(event.reply_token,message)
+  # using class
+  AR = AudioReact(event)
+  # speech to text reaction 
+  AR.speech2text()
 
 import os
 if __name__ == "__main__":
