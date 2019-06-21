@@ -356,6 +356,6 @@ class AudioReact():
     text = r.recognize_google(audio,language='cmn-Hant-TW')
     print(text)
     message = self.Temp.audio_template(text)
-    self.sent_to(message)
+    self.send_to(message)
 
 
