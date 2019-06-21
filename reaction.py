@@ -351,7 +351,7 @@ class AudioReact():
     except Exception as e:
         t = '音訊有問題'+test+str(e.args)+path
         message = TextSendMessage(text=t)
-        self.sent_to(message)
+        self.send_to(message)
     os.remove(path)
     text = r.recognize_google(audio,language='cmn-Hant-TW')
     print(text)
