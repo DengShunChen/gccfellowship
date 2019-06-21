@@ -9,11 +9,11 @@ class Template():
         alt_text='audio_template',
         template=ConfirmTemplate(
             title='確定一下吧',
-            text='您的建議是:\n{}'.format(text),
+            text='您說的是:\n{}'.format(text),
             actions=[
                 MessageTemplateAction(
-                    label='錯',
-                    text='那請再說一次'
+                    label='不對',
+                    text='抱歉！請再說一次。'
                 ),
                 MessageTemplateAction(
                     label='對',

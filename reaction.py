@@ -277,12 +277,12 @@ class MessageReact():
                       text='請選擇',
                       actions=[
                           MessageAction(
-                              label='雷達',
+                              label='雷達回波',
                               text='雷達'
                           ),
                           MessageAction(
-                              label='氣溫',
-                              text='氣溫'
+                              label='天氣小幫手',
+                              text='天氣小幫手'
                           ),
                           MessageAction(
                               label='衛星雲圖',
@@ -362,7 +362,33 @@ class MessageReact():
       )
 
       self.send_to(message=carousel_template_message)
-  
+
+    elif text == "小幫手":
+       buttons_template_message = TemplateSendMessage(
+          alt_text='小幫手功能',
+          template=ButtonsTemplate(
+            thumbnail_image_url='https://imgur.com/uqiTD3I.jpg',
+            title='功能',
+            text='請選擇',
+            actions=[
+              MessageAction(
+                label='靈糧',
+                text='靈糧'
+              ),
+              MessageAction(
+                label='天氣',
+                text='天氣'
+              ),
+              MessageAction(
+                label='災害警報',
+                text='警報'
+              )
+            ]
+          )
+        )
+      
+      self.send_to(message=buttons_template_message) 
+ 
     else:
       return -1
 
