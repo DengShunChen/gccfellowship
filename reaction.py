@@ -332,7 +332,7 @@ class AudioReact():
     else:
       print('Unknown send type !')
 
-  def speech2text():
+  def speech2text(self):
     r = sr.Recognizer()
     message_content = self.line_bot_api.get_message_content(self.event.message.id)
     ext = 'mp3'
