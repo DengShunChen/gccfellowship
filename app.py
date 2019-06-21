@@ -122,7 +122,7 @@ def handle_aud(event):
         t = '音訊有問題'+test+str(e.args)+path
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=t))
     os.remove(path)
-    text = r.recognize_google(audio,language='zh-TW',key='8b5e39a48981c61f21773ef49c2e24b4bc2e11d6')
+    text = r.recognize_google(audio,language='cmn-Hant-TW')
     print(text)
     message = Temp.audio_template(text)
     line_bot_api.reply_message(event.reply_token,message)
