@@ -314,9 +314,9 @@ class MessageReact():
       )
 
       self.send_to(message=carousel_template_message)
-    elif text == "靈糧":
+    elif text == "團契":
       carousel_template_message = TemplateSendMessage(
-          alt_text='靈糧',
+          alt_text='團契',
           template=CarouselTemplate(
               columns=[
                   CarouselColumn(
@@ -372,11 +372,11 @@ class MessageReact():
           text='請選擇',
           actions=[
               MessageAction(
-                label='靈糧',
-                text='靈糧'
+                label='團契相關',
+                text='團契'
               ),
               MessageAction(
-                label='天氣',
+                label='天氣資訊',
                 text='天氣'
               ),
               MessageAction(
