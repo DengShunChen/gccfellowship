@@ -268,7 +268,7 @@ class MessageReact():
 
     elif text == "天氣":
       carousel_template_message = TemplateSendMessage(
-          alt_text='目錄 contains',
+          alt_text='天氣',
           template=CarouselTemplate(
               columns=[
                   CarouselColumn(
@@ -284,9 +284,9 @@ class MessageReact():
                               label='氣溫',
                               text='氣溫'
                           ),
-                          URIAction(
-                              label='氣象局官網',
-                              uri='https://www.cwb.gov.tw/V8/C/index.html'
+                          MessageAction(
+                              label='衛星雲圖',
+                              text='衛星雲圖,東亞,可見光'
                           )
                       ]
                   ),
@@ -314,6 +314,55 @@ class MessageReact():
       )
 
       self.send_to(message=carousel_template_message)
+    elif text == "靈糧":
+      carousel_template_message = TemplateSendMessage(
+          alt_text='靈糧',
+          template=CarouselTemplate(
+              columns=[
+                  CarouselColumn(
+                      thumbnail_image_url='https://imgur.com/uqiTD3I.jpg',
+                      title='金句',
+                      text='請選擇',
+                      actions=[
+                          MessageAction(
+                              label='讚美主',
+                              text='讚美主'
+                          ),
+                          MessageAction(
+                              label='求安慰',
+                              text='求安慰'
+                          ),
+                          MessageAction(
+                              label='讚美主',
+                              text='讚美主'
+                          )
+                      ]
+                  ),
+                  CarouselColumn(
+                      thumbnail_image_url='https://imgur.com/uqiTD3I.jpg',
+                      title='團契聚會',
+                      text='請選擇',
+                      actions=[
+                          MessageAction(
+                              label='代禱',
+                              text='代禱'
+                          ),
+                          MessageAction(
+                              label='靈命日糧',
+                              text='靈命日糧'
+                          ),
+                          MessageAction(
+                              label='聚會',
+                              text='聚會'
+                          )
+                      ]
+                  )
+              ]
+          )
+      )
+
+      self.send_to(message=carousel_template_message)
+  
     else:
       return -1
 
