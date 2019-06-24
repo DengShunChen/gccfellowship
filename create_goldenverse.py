@@ -122,8 +122,8 @@ def CreateCard(propose='金句'):
   image.save('verse_card.png')
 
   tb = Toolbox()
-#  photo_link = tb.upload_photo('verse_card.png')
-#  return photo_link
+  photo_link = tb.upload_photo('verse_card.png')
+  return photo_link
 
 if __name__ == '__main__':
   print(CreateCard('醫治'))
