@@ -37,35 +37,8 @@ def callback():
 def handle_message(event):
   # using class
   MR = MessageReact(event)
-
   # text message reaction 
   MR.react(event.message.text)
-
-# 處理加入訊息
-@handler.add(JoinEvent)
-def handle_join(event):
-    newcoming_text = "謝謝邀請小幫手來至此群組！！我會盡力為大家服務～"
-
-    line_bot_api.reply_message(
-            event.reply_token,
-            TextMessage(text=newcoming_text)
-        )
-    line_bot_api.push_message(
-            userID,
-            TextMessage(text='Hi 有群組加入小幫手了唷！')
-        )
-    print("JoinEvent =", event)
-    print("加入的相關資訊 =", event.source)
-
-# 處理離開訊息
-@handler.add(LeaveEvent)
-def handle_leave(event):
-    print("leave Event =", event)
-    print("我被踢掉了QQ 相關資訊", event.source)
-    line_bot_api.push_message(
-            userID,
-            TextMessage(text='Hi 有群組離開小幫手了唷！')
-        )
 
 # 處理貼圖（隨機選擇貼圖回應）
 @handler.add(MessageEvent, message=StickerMessage)
@@ -103,6 +76,32 @@ def handle_aud(event):
   AR = AudioReact(event)
   # speech to text reaction 
   AR.speech2text()
+
+# 處理加入訊息
+@handler.add(JoinEvent)
+def handle_join(event):
+    newcoming_text = "謝謝邀請小幫手來至此群組！！我會盡力為大家服務～"
+
+    line_bot_api.reply_message(
+            event.reply_token,
+            TextMessage(text=newcoming_text)
+        )
+    line_bot_api.push_message(
+            userID,
+            TextMessage(text='Hi 有群組加入小幫手了唷！')
+        )
+    print("JoinEvent =", event)
+    print("加入的相關資訊 =", event.source)
+
+# 處理離開訊息
+@handler.add(LeaveEvent)
+def handle_leave(event):
+    print("leave Event =", event)
+    print("我被踢掉了QQ 相關資訊", event.source)
+    line_bot_api.push_message(
+            userID,
+            TextMessage(text='Hi 有群組離開小幫手了唷！')
+        )
 
 import os
 if __name__ == "__main__":

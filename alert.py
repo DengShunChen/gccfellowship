@@ -13,7 +13,7 @@ def show_alert(data):
   GMT_plus_8 = timedelta(hours=8)
   string = '[北北桃竹地區 警特報'+ (datetime.utcnow()+GMT_plus_8).strftime("%Y/%m/%d %H:%M:%S") +']\n'
   authorlist = ['中央氣象局']
-  keywordlist=['桃園市','台北市','新北市','新竹市','新竹縣']
+  keywordlist=['桃園市','台北市','新北市','新竹市','新竹縣','基隆市','宜蘭縣']
   count = 1
   if type(data) is dict:
     author = data['author']['name']

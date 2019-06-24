@@ -329,12 +329,12 @@ class MessageReact():
                               text='讚美主'
                           ),
                           MessageAction(
-                              label='求安慰',
+                              label='安慰',
                               text='求安慰'
                           ),
                           MessageAction(
-                              label='讚美主',
-                              text='讚美主'
+                              label='醫治',
+                              text='求醫治'
                           )
                       ]
                   ),

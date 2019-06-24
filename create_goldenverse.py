@@ -7,7 +7,7 @@ import random
 from tools import Toolbox 
 
 def CreateCard(propose='金句'):
-  bkgds_id = random.randint(0,12)
+  bkgds_id = random.randint(0,7)
   bkgd = './picture/背景%2.2d.jpg' % (bkgds_id)
 
   # character color 
@@ -33,6 +33,19 @@ def CreateCard(propose='金句'):
 
   # create Image object with the input image
   image = Image.open(bkgd)
+
+  # open logo picture 
+  logo = Image.open('./picture/喜樂家庭團契logo橫幅.png')
+
+  # set box
+  box = (10, 10, 320, 80)
+
+  logo = logo.convert('RGBA')
+  # merge logo with background image
+  logo = logo.resize((box[2] - box[0], box[3] - box[1]))
+  
+  image.paste(logo, box, logo)
+  #image.paste(logo, box)
 
   # initialise the drawing context with
   # the image object as background
@@ -90,7 +103,7 @@ def CreateCard(propose='金句'):
 
   # another characters
   (x, y) = (350, 370)
-  name = 'Young Couple Fellowship X Glory Christian Church'
+  name = '中國佈道會中壢高榮禮拜堂'
 
   # character color 
   whitelist = [0, 8, 4, 5, 11, 12]
@@ -109,8 +122,8 @@ def CreateCard(propose='金句'):
   image.save('verse_card.png')
 
   tb = Toolbox()
-  photo_link = tb.upload_photo('verse_card.png')
-  return photo_link
+#  photo_link = tb.upload_photo('verse_card.png')
+#  return photo_link
 
 if __name__ == '__main__':
   print(CreateCard('醫治'))
