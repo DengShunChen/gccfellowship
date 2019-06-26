@@ -35,7 +35,7 @@ def CreateCard(propose='金句'):
   image = Image.open(bkgd)
 
   # open logo picture 
-  logo = Image.open('./picture/喜樂家庭團契logo橫幅.png')
+  logo = Image.open('./picture/logo_hor.png')
 
   # set box
   box = (10, 10, 320, 80)
