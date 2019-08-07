@@ -20,15 +20,26 @@ def get_post():
   soup = BeautifulSoup(thepage, "html.parser")
 
   # title 
-  string = '活潑的生命 每日經文'
-  content =  string + '\n'
-  content = content + url + '\n'
-  content = content + '\n'
+  content = '活潑的生命 每日經文\n'
+  content = content + url + '\n\n'
 
-  posts = soup.find_all('div',class_="in_body")
-  for p,post in enumerate(posts):
-    title = post.text
-    content = content +  title + '\n'
+  posts = soup.find_all('div', class_="in_body")
+  string = posts[0].text.split('\n')
+
+  content =  content + string[2].strip() + '\n'
+  content =  content + string[15].strip() + '\n'
+  content =  content + string[17].strip() + '\n\n'
+  content =  content + string[19].strip() + '\n'
+  content =  content + string[21].strip() + '\n\n'
+  content =  content + string[24].strip() + '\n'
+  content =  content + string[26].strip() + '\n\n'
+  content =  content + string[29].strip() + '\n'
+  content =  content + string[36].strip().split('"')[1] + '\n\n'
+  content =  content + string[57].strip() + '\n'
+  content =  content + string[59].strip() + '\n\n'
+  content =  content + string[61].strip() + '\n'
+  content =  content + string[62].strip() + '\n'
+
 
   return content 
 

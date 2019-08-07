@@ -5,6 +5,8 @@ from cwb_data import *
 #from google_search import *
 from prayer import *
 from dailybread import get_post as dbpost
+from streams import get_post as stpost
+from duranno import get_post as drpost
 from cct import get_post as cctpost
 from attendance import create as attend_create
 from attendance import show as attend_show
@@ -145,6 +147,18 @@ class MessageReact():
 
     elif text == "靈命日糧":
       content = dbpost()
+      message = TextSendMessage(text=content)
+      self.send_to(message=message)
+      return 0
+
+    elif text == "荒漠甘泉":
+      content = stpost()
+      message = TextSendMessage(text=content)
+      self.send_to(message=message)
+      return 0
+
+    elif text == "活潑的生命":
+      content = drpost()
       message = TextSendMessage(text=content)
       self.send_to(message=message)
       return 0
