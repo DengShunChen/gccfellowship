@@ -9,7 +9,6 @@ def get_url():
   month = now.strftime("%m")
   day = now.strftime("%d")  
   url='https://www.fhl.net/stream/%d/%2.2d%2.2d.htm' % (int(month),int(month),int(day))
-  url='https://www.fhl.net/stream/6/0604.htm' 
 
 # thepage = ur.urlopen(url)
 # soup = BeautifulSoup(thepage, "html.parser")
