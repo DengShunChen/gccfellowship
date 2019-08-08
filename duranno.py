@@ -24,21 +24,32 @@ def get_post():
   content = content + url + '\n\n'
 
   posts = soup.find_all('div', class_="in_body")
-  string = posts[0].text.split('\n')
 
+  string = posts[0].text.split('\n')
+  print(string)
   content =  content + string[2].strip() + '\n'
-  content =  content + string[15].strip() + '\n'
-  content =  content + string[17].strip() + '\n\n'
-  content =  content + string[19].strip() + '\n'
-  content =  content + string[21].strip() + '\n\n'
-  content =  content + string[24].strip() + '\n'
-  content =  content + string[26].strip() + '\n\n'
-  content =  content + string[29].strip() + '\n'
-  content =  content + string[36].strip().split('"')[1] + '\n\n'
-  content =  content + string[57].strip() + '\n'
-  content =  content + string[59].strip() + '\n\n'
-  content =  content + string[61].strip() + '\n'
-  content =  content + string[62].strip() + '\n'
+  index = string.index('  ★\xa0今天的主題')
+  content =  content + string[index].strip() + '\n'
+  content =  content + string[index+2].strip() + '\n\n'
+
+  index = string.index('  ★\xa0經文範圍')
+  content =  content + string[index].strip() + '\n'
+  content =  content + string[index+2].strip() + '\n\n'
+
+  index = string.index('  ★\xa0經文摘要')
+  content =  content + string[index].strip() + '\n'
+  content =  content + string[index+2].strip() + '\n\n'
+
+  content =  content + string[index+5].strip() + '\n'
+  content =  content + string[index+12].strip().split('"')[1] + '\n\n'
+
+  index = string.index('  ★\xa0全心禱告')
+  content =  content + string[index].strip() + '\n'
+  content =  content + string[index+2].strip() + '\n\n'
+
+  index = string.index('  ★\xa0全年讀經')
+  content =  content + string[index].strip() + '\n'
+  content =  content + string[index+1].strip() + '\n'
 
 
   return content 
