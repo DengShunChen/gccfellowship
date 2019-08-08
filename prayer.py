@@ -190,8 +190,7 @@ def createprayer(text):
     range_name = '感恩代禱事項!A2:A2'
     values = [[create_date]]
     result = ss.update_values(spreadsheet_id,range_name,'USER_ENTERED',values) 
-    
-
+    result = '您好！已備份與建立新代禱！'
     return result
 
 if __name__ == '__main__':

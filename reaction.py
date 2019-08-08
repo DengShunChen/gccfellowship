@@ -126,6 +126,11 @@ class MessageReact():
       message = TextSendMessage(text=content)
       self.send_to(message=message)
       return 0
+    elif text.strip().split(',')[0] == "建立代禱":
+        content = createprayer(text)
+        message = TextSendMessage(text=content)
+        self.send_to(message=message)
+        return 0
 
     elif text.strip().split(',')[0] == "代禱":
       if len(text.strip().split(',')) == 1:
