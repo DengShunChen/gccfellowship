@@ -67,6 +67,30 @@ class SpreadsheetSnippets(object):
         # [END sheets_batch_update]
         return response
 
+    def add_worksheet(self, spreadsheet_id, title):
+        service = self.service
+        # [START sheets_batch_update]
+        requests = []
+        body = {
+            'requests': [{
+                'addSheet': {
+                    'properties': {
+                        'title': title,
+                        'index': 1                   
+                    }
+                }
+            }]
+        }
+        response = service.spreadsheets().batchUpdate(
+            spreadsheetId=spreadsheet_id,
+            body=body).execute()
+        add_worksheet_response = response.get('replies')[0].get('addSheet')
+        print('{0} '.format(
+            add_worksheet_response.get('properties')))
+        # [END sheets_batch_update]
+        return response
+
+
     def get_values(self, spreadsheet_id, range_name):
         service = self.service
         # [START sheets_get_values]
