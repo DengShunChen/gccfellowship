@@ -13,9 +13,10 @@ def read_json(url):
 
 def show_alert(data):
   GMT_plus_8 = timedelta(hours=8)
-  string = '[北北桃竹地區 警特報'+ (datetime.utcnow()+GMT_plus_8).strftime("%Y/%m/%d %H:%M:%S") +']\n'
+  string = '[園園地區 警特報'+ (datetime.utcnow()+GMT_plus_8).strftime("%Y/%m/%d %H:%M:%S") +']\n'
   authorlist = ['中央氣象局']
-  keywordlist=['桃園市','台北市','新北市','新竹市','新竹縣','基隆市','宜蘭縣']
+  #keywordlist=['桃園市','台北市','新北市','新竹市','新竹縣','基隆市','宜蘭縣']
+  keywordlist=['桃園市']
   count = 1
   if type(data) is dict:
     author = data['author']['name']
@@ -69,5 +70,5 @@ def show_all(data):
 if __name__ == '__main__':
   url = 'https://alerts.ncdr.nat.gov.tw/JSONAtomFeeds.ashx'
   data = read_json(url)['entry']
-#  print(show_alert(data))
-  print(show_all(data))
+  print(show_alert(data))
+#  print(show_all(data))
