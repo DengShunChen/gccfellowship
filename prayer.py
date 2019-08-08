@@ -85,7 +85,7 @@ def show_results(values,spreadsheet,date=''):
     strings = strings + '\n'
     strings = strings + '如需新增/更新代禱事項，請依照以下格式輸入：' + '\n'
     strings = strings + '代禱,姓名,代禱事項   或' + '\n'
-    strings = strings + '代禱,姓名:代禱事項' + '\n'
+    strings = strings + '代禱,姓名：代禱事項' + '\n'
     return strings
 
 def readprayer():
@@ -141,7 +141,7 @@ def writeprayer(text):
         if line == '':
           continue
         print(line)
-        pair = line.split(':')
+        pair = line.split('：')
         name = pair[0]
         prayer = pair[1]
         values = [[name,prayer]]
