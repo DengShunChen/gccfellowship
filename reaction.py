@@ -256,7 +256,7 @@ class MessageReact():
       self.send_to(message=message)
       return 0
  
-    elif text.strip().split(',')[0] == "經文":
+    elif text.strip().split(',')[0] == "聖經":
       args = text.strip().split(',')
       if len(args) == 1:
         content = bible()
