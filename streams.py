@@ -1,11 +1,13 @@
 #!/usr/bin/env python 
 import urllib.request as ur
 from bs4 import BeautifulSoup
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def get_url():
+  GMT_plus_8 = timedelta(hours=8)
+  now = datetime.utcnow() + GMT_plus_8
+#  now = datetime.today()
 
-  now = datetime.today()
   month = now.strftime("%m")
   day = now.strftime("%d")  
   url='https://www.fhl.net/stream/%d/%2.2d%2.2d.htm' % (int(month),int(month),int(day))

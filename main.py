@@ -1,5 +1,5 @@
 #!/usr/bin/env python 
-from datetime import datetime, timedelta
+#from datetime import datetime, timedelta
 from flask import Flask, request, abort
 import random
 from line_bot_api import get_api
