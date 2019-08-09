@@ -21,6 +21,7 @@ import speech_recognition as sr
 import os
 import tempfile
 from template import Template
+from bible import bible
 
 class MessageReact():
   def __init__(self,event):
@@ -254,7 +255,20 @@ class MessageReact():
       )
       self.send_to(message=message)
       return 0
-   
+ 
+    elif text.strip().split(',')[0] == "經文":
+      args = text.strip().split(',')
+      if len(args) == 1:
+        content = bible()
+      elif len(args) == 2:
+        content = bible(args[1])
+      elif len(args) == 3:
+        content = bible(args[1],args[2])
+
+      message = TextSendMessage(text=content)
+      self.send_to(message=message)
+      return 0
+  
     elif text.strip().split(',')[0] == "聚會":
       if len(text.strip().split(',')) == 1:
         content = attend_show()
