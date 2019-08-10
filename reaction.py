@@ -265,9 +265,10 @@ class MessageReact():
       elif len(args) == 3:
         content = bible(args[1],args[2])
 
-      message = TextSendMessage(text=content)
-      self.send_to(message=message)
-      return 0
+      for string in content:
+        message = TextSendMessage(text=string)
+        self.send_to(message=message)
+        return 0
   
     elif text.strip().split(',')[0] == "聚會":
       if len(text.strip().split(',')) == 1:

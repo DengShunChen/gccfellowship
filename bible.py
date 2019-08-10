@@ -28,16 +28,22 @@ def bible(bookname='箴',chap=1):
   # get data
   data = read_json(url)
 
-  string = '%s:%d\n' % (bookname,int(chap))
+  string = ['','']
+
+  n=0
+  string[n] = '%s:%d\n' % (bookname,int(chap))
 
   if data['status'] == "success":
     for r in data['record']:  
       verse = '%d.%s' % (r['sec'],r['bible_text'])
-      string = string + verse + '\n'
+      if len(string[n]) > 1950:
+        string[n+1] = string[n+1] + verse + '\n'
+      else: 
+        string[n] = string[n] + verse + '\n'
 
   return string
 
 
 if __name__ == '__main__':
-  print(bible('羅','我'))
+  print(bible('路','3'))
 #  print(show_all(data))
