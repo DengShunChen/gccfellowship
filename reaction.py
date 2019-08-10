@@ -264,6 +264,8 @@ class MessageReact():
         content = bible(args[1])
       elif len(args) == 3:
         content = bible(args[1],args[2])
+      elif len(args) == 4:
+        content = bible(args[1],args[2],args[3])
 
       for string in content:
         message = TextSendMessage(text=string)
