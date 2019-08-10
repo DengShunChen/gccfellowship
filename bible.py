@@ -14,7 +14,7 @@ def read_json(url):
   data = json.loads(urldata.read())
   return data
 
-def bible(bookname='箴',chap=1):
+def bible(bookname='箴',chap=1, sec=None):
   # prepare url
   book = up.quote(bookname)
   try:
@@ -23,7 +23,10 @@ def bible(bookname='箴',chap=1):
     string = '章節設置錯誤-->"%s"' % (chap)
     return string
 
-  url = "https://bible.fhl.net/json/qb.php?chineses=%s&chap=%d" % (book,int(chap))
+  if not sec == None:
+    url = "https://bible.fhl.net/json/qb.php?chineses=%s&chap=%d&sec=%s" % (book,int(chap),sec)
+  else:
+    url = "https://bible.fhl.net/json/qb.php?chineses=%s&chap=%d" % (book,int(chap))
 
   # get data
   data = read_json(url)
@@ -45,5 +48,5 @@ def bible(bookname='箴',chap=1):
 
 
 if __name__ == '__main__':
-  print(bible('路','3'))
+  print(bible('路','12','22-34'))
 #  print(show_all(data))
