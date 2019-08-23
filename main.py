@@ -9,12 +9,13 @@ from linebot.exceptions import (
 from linebot.models import *
 from reaction import MessageReact, AudioReact 
 
+# flask 
 app = Flask(__name__)
 
 # get Line bot API 
 line_bot_api, handler = get_api()
 
-# Deng-Shun 
+# Deng-Shun ID
 userID='Uee94d5ab36b7b6e02a774098d6d735ae'
 
 # 監聽所有來自 /callback 的 Post Request
@@ -35,10 +36,11 @@ def callback():
 # 處理文字訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-  # using class
-  MR = MessageReact(event)
-  # text message reaction 
-  MR.react(event.message.text)
+    # using class
+    MR = MessageReact(event)
+
+    # text message reaction 
+    MR.react(event.message.text)
 
 # 處理貼圖（隨機選擇貼圖回應）
 @handler.add(MessageEvent, message=StickerMessage)
@@ -72,10 +74,10 @@ import os
 import tempfile
 @handler.add(MessageEvent,message=AudioMessage)
 def handle_aud(event):
-  # using class
-  AR = AudioReact(event)
-  # speech to text reaction 
-  AR.speech2text()
+    # using class
+    AR = AudioReact(event)
+    # speech to text reaction 
+    AR.speech2text()
 
 # 處理加入訊息
 @handler.add(JoinEvent)
