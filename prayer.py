@@ -141,6 +141,7 @@ def writeprayer(text):
         if line == '':
           continue
         print(line)
+        line.replace(':','：')
         pair = line.split('：')
         name = pair[0]
         prayer = pair[1]
