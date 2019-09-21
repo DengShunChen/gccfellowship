@@ -93,13 +93,13 @@ def show():
     strings = strings + '\n'
     strings = strings + '請假：%s' % (off) + '\n'
     strings = strings + '\n'
-    strings = strings + '\n'
-    strings = strings + '功能範例：' + '\n'
-    strings = strings + '新增聚會-> 建立聚會,2019/MM/DD,AM10:00,教會一樓會議室,分享主題,講員,詩歌,幼兒照顧' + '\n'
-    strings = strings + '暫停聚會-> 建立聚會,2019/MM/DD,暫停' + '\n'
-    strings = strings + '查詢聚會-> 聚會' + '\n'
-    strings = strings + '填寫出席-> 聚會,姓名,出席/請假' +'\n'
-    strings = strings + '\n'
+#   strings = strings + '\n'
+#   strings = strings + '功能範例：' + '\n'
+#   strings = strings + '新增聚會-> 建立聚會,2019/MM/DD,AM10:00,教會一樓會議室,分享主題,講員,詩歌,幼兒照顧' + '\n'
+#   strings = strings + '暫停聚會-> 建立聚會,2019/MM/DD,暫停' + '\n'
+#   strings = strings + '查詢聚會-> 聚會' + '\n'
+#   strings = strings + '填寫出席-> 聚會,姓名,出席/請假' +'\n'
+#   strings = strings + '\n'
 
     return strings
 
