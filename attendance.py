@@ -114,7 +114,7 @@ def create(text):
     if len(textlist) != 9 and (len(textlist) != 3 or textlist[2] != '暫停'):
       return '團契主席好！請依照以下方式建立聚會喔:)\n新增聚會：建立聚會,2019/MM/DD,AM10:00,教會一樓會議室,分享主題,講員,司會,詩歌,幼兒照顧\n暫停聚會：建立聚會,2019/MM/DD,暫停'
 
-    if len(textlist) == 8:
+    if len(textlist) == 9:
       date = textlist[1]
       time = textlist[2]
       position = textlist[3]
