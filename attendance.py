@@ -50,7 +50,7 @@ def show():
     # using SpreadsheetSnippets class
     ss = SpreadsheetSnippets(service)
 
-    range_name='A2:G2'
+    range_name='A2:H2'
     result = ss.get_values(spreadsheet_id,range_name) 
     values = result.get('values', [])
     strings=''
@@ -111,8 +111,8 @@ def index_2d(myList, v):
 
 def create(text):
     textlist=text.strip().split(',')
-    if len(textlist) != 8 and (len(textlist) != 3 or textlist[2] != '暫停'):
-      return '團契主席好！請依照以下方式建立聚會喔:)\n新增聚會：建立聚會,2019/MM/DD,AM10:00,教會一樓會議室,分享主題,講員,詩歌,幼兒照顧\n暫停聚會：建立聚會,2019/MM/DD,暫停'
+    if len(textlist) != 9 and (len(textlist) != 3 or textlist[2] != '暫停'):
+      return '團契主席好！請依照以下方式建立聚會喔:)\n新增聚會：建立聚會,2019/MM/DD,AM10:00,教會一樓會議室,分享主題,講員,司會,詩歌,幼兒照顧\n暫停聚會：建立聚會,2019/MM/DD,暫停'
 
     if len(textlist) == 8:
       date = textlist[1]
@@ -120,18 +120,20 @@ def create(text):
       position = textlist[3]
       subject = textlist[4]
       speaker = textlist[5]
-      worship = textlist[6]
-      babysitter = textlist[7]
+      leader = textlist[6]
+      worship = textlist[7]
+      babysitter = textlist[8]
     elif len(textlist) == 3:
       date = textlist[1]
       time = textlist[2]
       position = textlist[2]
       subject = textlist[2]
       speaker = textlist[2]
+      leader = textlist[2]
       worship = textlist[2]
       babysitter = textlist[2]
 
-    _values = [[date,time,position,subject,speaker,worship,babysitter]]
+    _values = [[date,time,position,subject,speaker,leader,worship,babysitter]]
  
     # create service for google spreadsheet
     service = build_service()
@@ -151,7 +153,7 @@ def create(text):
         clean = True
  
     # write values
-    range_name='A2:G2'
+    range_name='A2:H2'
     result = ss.update_values(spreadsheet_id,range_name,'USER_ENTERED',_values) 
 
     # clear attendance
